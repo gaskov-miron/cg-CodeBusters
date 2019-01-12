@@ -1,52 +1,39 @@
-import math
 import sys
 import itertools
-import pickle
-import codecs
 
 
-def fight(my_busters, enemy_ids):
+def fight(my_busters, enemy_busters):
     a = []
-    b = {-1: False}
-    for i in my_busters:
+    b = {i: enemy_busters[i].is_carrying() for i in enemy_busters}
+    b[-1] = False
+    my_id = int(0 not in my_busters)
+
+    best_var, best_released_ghosts, best_stuned_enemies = None, None, None
+
+    for i in sorted(my_busters):
         can_stun = [-1]
-        for j in enemy_ids:
-            if g.enemy_busters[j].is_visible and g.enemy_busters[j].state != 2:
-                if distance(g.my_busters[i], g.enemy_busters[j]) <= 1760 and g.my_busters[i].reload == 0:
-                    can_stun += [j]
-                    if j not in b:
-                        if g.enemy_busters[j].state == 1:
-                            b[j] = True
-                        else:
-                            b[j] = False
+        for j in enemy_busters:
+            if my_busters[i].can_stun(enemy_busters[j]):
+                can_stun += [j]
         a.append(can_stun)
-    return a, b
 
-
-def attack(a, b, ids, delta):
-    lis = [i for i in itertools.product(*a) if len(set(i)) + ''.join(map(str, i)).count('-1') - 1 == len(i)]
-    best_var = lis[0]
-    for i in lis:
-        num_carry_1 = 0
-        num_carry_2 = 0
-        for j in i:
-            num_carry_1 += b[j]
-        for g in best_var:
-            num_carry_2 += b[g]
-        if num_carry_1 > num_carry_2:
+    for i in itertools.product(*a):
+        stuned_enemies = sum([1 for j in i if j != -1])
+        #TODO разобраться с -1
+        if len(set(i)) - stuned_enemies - 1 != 0:
+            continue
+        released_ghosts = sum(b[j] for j in i)
+        if (best_var is None) or (released_ghosts, stuned_enemies) > (best_released_ghosts, best_stuned_enemies):
             best_var = i[:]
-        elif num_carry_1 == num_carry_2:
-            st_1 = ''.join(map(str, i))
-            st_2 = ''.join(map(str, best_var))
-            if st_1.count('-1') < st_2.count('-1'):
-                best_var = i[:]
+            best_released_ghosts = released_ghosts
+            best_stuned_enemies = stuned_enemies
 
-    dic = {i: best_var[i - delta] for i in ids if best_var[i - delta] != -1}
+    dic = {i: best_var[i - (len(my_busters))*my_id] for i in sorted(my_busters) if best_var[i - (len(my_busters))*my_id] != -1}
     return dic
 
 
 def distance(a, b):
-    return math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+    return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
 
 
 def squared_distance(a, b):
@@ -59,7 +46,7 @@ class Base:
         self.y = y
 
     def can_release(self, buster):
-        return distance(self, buster) <= 1600
+        return distance(self, buster) <= 1600**2
 
 
 class Buster:
@@ -76,12 +63,25 @@ class Buster:
         self.carry_ghost_id = None
         self.turns_to_stay = 0
 
+    def can_stun(self, buster):
+        # TODO: проверять, что не подбит
+        if buster.is_visible and buster.state != 2:
+            if distance(self, buster) <= 1760 ** 2 and self.reload == 0:
+                return 1
+        return 0
+
+    def is_carrying(self):
+        if self.state == 1:
+            return True
+        else:
+            return False
+
     def entities_in_range(self, enties, min_dist, max_dist):
         result = []
         for i in enties:
             if i.is_visible:
                 dist = distance(i, self)
-                if min_dist <= dist <= max_dist:
+                if min_dist**2 <= dist <= max_dist**2:
                     result.append(i)
         return result
 
@@ -132,7 +132,7 @@ class Ghost:
                 self.y = None
                 break
         for i in list(my_busters.values()):
-            if (self.x != None and self.y != None) and distance(i, self) <= 1760:
+            if (self.x != None and self.y != None) and distance(i, self) <= 1760**2:
                 self.x = None
                 self.y = None
                 break
@@ -223,8 +223,7 @@ def step(update_lines):
     global g
     res = ''
     g.update(update_lines)
-    a, b = fight(g.my_busters, g.enemy_ids)
-    attacks = attack(a, b, g.my_ids, g.busters_cnt * g.my_id)
+    attacks = fight(g.my_busters, g.enemy_busters)
     for i in g.my_ids:
         buster = g.my_busters[i]
         if i in attacks:
@@ -246,7 +245,7 @@ def step(update_lines):
             res += 'MOVE' + ' ' + str(buster.x) + ' ' + str(buster.y) + '\n'
             continue
         if len(g.ghosts) != 0:
-            m_dist = math.sqrt(16000 ** 2 + 9000 ** 2)
+            m_dist = 16000 ** 2 + 9000 ** 2
             min_i = -1
             for h in g.ghosts:
                 if g.ghosts[h].x != None and g.ghosts[h].y != None:

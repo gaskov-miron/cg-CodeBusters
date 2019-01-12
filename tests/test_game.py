@@ -9,6 +9,7 @@ class TestGame(TestCase):
         self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game3.txt')
         self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game4.txt')
         self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game5.txt')
+        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game6.txt')
 
     def test_game_file(self, file_name):
         with open(file_name, 'r') as f:
