@@ -41,6 +41,5 @@ class TestEngine(TestCase):
         self.assertEqual(i2, file_s.split('---')[3][1:])
         for i in range(3, len(file_s.split('\n\n'))-8, 8):
             o1, o2 = step(file_s.split('\n\n')[i], file_s.split('\n\n')[i+4], i//3)
-            print(o1, '\n\n', o2, '\n')
-            self.assertEqual(o1, file_s.split('\n\n')[i+6].split('---')[0][:-1])
-            self.assertEqual(o2, file_s.split('\n\n')[i+10].split('---')[0][:-1])
+            self.assertEqual(o1[:-1], file_s.split('\n\n')[i+6].split('---')[0][:-1])
+            self.assertEqual(o2[:-1], file_s.split('\n\n')[i+10].split('---')[0][:-1])

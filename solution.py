@@ -4,11 +4,7 @@ import itertools
 
 def fight(my_busters, enemy_busters):
     a = []
-    b = {i: enemy_busters[i].is_carrying() for i in enemy_busters}
-    b[-1] = False
-    my_id = int(0 not in my_busters)
-
-    best_var, best_released_ghosts, best_stuned_enemies = None, None, None
+    best_var, best_score = None, None
 
     for i in sorted(my_busters):
         can_stun = [-1]
@@ -18,17 +14,18 @@ def fight(my_busters, enemy_busters):
         a.append(can_stun)
 
     for i in itertools.product(*a):
-        stuned_enemies = sum([1 for j in i if j != -1])
-        #TODO разобраться с -1
-        if len(set(i)) - stuned_enemies - 1 != 0:
+        stuned_enemies_ids = [j for j in i if j != -1]
+        if len(set(stuned_enemies_ids)) != len(stuned_enemies_ids):
             continue
-        released_ghosts = sum(b[j] for j in i)
-        if (best_var is None) or (released_ghosts, stuned_enemies) > (best_released_ghosts, best_stuned_enemies):
-            best_var = i[:]
-            best_released_ghosts = released_ghosts
-            best_stuned_enemies = stuned_enemies
+        stuned_enemies_cnt = len(stuned_enemies_ids)
+        released_ghosts_cnt = sum([enemy_busters[j].is_carrying() for j in stuned_enemies_ids])
+        if (best_var is None) or (released_ghosts_cnt, stuned_enemies_cnt) > best_score:
+            best_var = i
+            best_score = (released_ghosts_cnt, stuned_enemies_cnt)
 
-    dic = {i: best_var[i - (len(my_busters))*my_id] for i in sorted(my_busters) if best_var[i - (len(my_busters))*my_id] != -1}
+    my_id = int(0 not in my_busters)
+    dic = {i: best_var[i - (len(my_busters)) * my_id] for i in sorted(my_busters) if
+           best_var[i - (len(my_busters)) * my_id] != -1}
     return dic
 
 
@@ -36,7 +33,7 @@ def distance(a, b):
     return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
 
 
-def squared_distance(a, b):
+def tuples_distance(a, b):
     return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
 
 
@@ -46,7 +43,7 @@ class Base:
         self.y = y
 
     def can_release(self, buster):
-        return distance(self, buster) <= 1600**2
+        return distance(self, buster) <= 1600 ** 2
 
 
 class Buster:
@@ -64,29 +61,20 @@ class Buster:
         self.turns_to_stay = 0
 
     def can_stun(self, buster):
-        # TODO: проверять, что не подбит
-        if buster.is_visible and buster.state != 2:
-            if distance(self, buster) <= 1760 ** 2 and self.reload == 0:
-                return 1
-        return 0
+        return self.state != 2 and buster.is_visible and \
+               buster.state != 2 and distance(self, buster) <= 1760 ** 2 and self.reload == 0
 
     def is_carrying(self):
-        if self.state == 1:
-            return True
-        else:
-            return False
+        return self.state == 1
 
     def entities_in_range(self, enties, min_dist, max_dist):
         result = []
         for i in enties:
-            if i.is_visible:
-                dist = distance(i, self)
-                if min_dist**2 <= dist <= max_dist**2:
-                    result.append(i)
+            if i.is_visible and min_dist ** 2 <= distance(i, self) <= max_dist ** 2:
+                result.append(i)
         return result
 
     def update(self, x, y, state, value):
-
         self.is_visible = True
         self.x = x
         self.y = y
@@ -111,7 +99,6 @@ class Buster:
 
 
 class Ghost:
-
     def __init__(self, ghost_id, x, y):
         self.found = False
         self.id = ghost_id
@@ -132,13 +119,14 @@ class Ghost:
                 self.y = None
                 break
         for i in list(my_busters.values()):
-            if (self.x != None and self.y != None) and distance(i, self) <= 1760**2:
+            if (self.x is not None and self.y is not None) and distance(i, self) <= 1760 ** 2:
                 self.x = None
                 self.y = None
                 break
 
 
 class Game:
+    @staticmethod
     def fill_busters(dic, ids):
         for i in ids:
             dic[i] = Buster(i, None, None)
@@ -177,7 +165,7 @@ class Game:
                 self.visited_points.append((x, y))
                 new_points = []
                 for point in self.points_to_see[:]:
-                    if squared_distance(point, (x, y)) > 1760 ** 2:
+                    if tuples_distance(point, (x, y)) > 1760 ** 2:
                         new_points.append(point)
                 self.points_to_see = new_points[:]
             if _type == -1 and not self.ghosts[_id].found:
@@ -205,7 +193,7 @@ class Game:
                 op_x = self.enemy_base.x + (self.base.x - self.ghosts[_id].x)
                 op_y = self.enemy_base.y + (self.base.y - self.ghosts[_id].y)
                 for x_y in self.visited_points:
-                    if squared_distance(x_y, (op_x, op_y)) < 1760 ** 2:
+                    if tuples_distance(x_y, (op_x, op_y)) < 1760 ** 2:
                         gh = False
                         break
                 if gh:
@@ -248,7 +236,7 @@ def step(update_lines):
             m_dist = 16000 ** 2 + 9000 ** 2
             min_i = -1
             for h in g.ghosts:
-                if g.ghosts[h].x != None and g.ghosts[h].y != None:
+                if g.ghosts[h].x is not None and g.ghosts[h].y is not None:
                     if m_dist > distance(g.ghosts[h], buster):
                         m_dist = distance(g.ghosts[h], buster)
                         min_i = h
@@ -257,9 +245,9 @@ def step(update_lines):
                 continue
         if len(g.points_to_see) != 0:
             nearest_point = g.points_to_see[0]
-            min_distance = squared_distance(nearest_point, (g.my_busters[i].x, g.my_busters[i].y))
+            min_distance = tuples_distance(nearest_point, (g.my_busters[i].x, g.my_busters[i].y))
             for point in g.points_to_see:
-                _distance = squared_distance(point, (g.my_busters[i].x, g.my_busters[i].y))
+                _distance = tuples_distance(point, (g.my_busters[i].x, g.my_busters[i].y))
                 if _distance < min_distance:
                     nearest_point = point
                     min_distance = _distance
