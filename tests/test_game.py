@@ -14,7 +14,7 @@ class TestGame(TestCase):
     def test_game_file(self, file_name):
         with open(file_name, 'r') as f:
             lis = ''.join(f.readlines()).split('\n')
-            init(lis[0] + '\n' + lis[1] + '\n' + lis[2])
+            g = init(lis[0] + '\n' + lis[1] + '\n' + lis[2])
             lis = lis[4:]
             d = []
             t = ''
@@ -25,5 +25,5 @@ class TestGame(TestCase):
                     d.append(t[:-1])
                     t = ''
             for i in range(0, len(d), 3):
-                step_out = step(d[i])
+                step_out = step(d[i], g)
                 self.assertEqual(step_out, d[i + 1])
