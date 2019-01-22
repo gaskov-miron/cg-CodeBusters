@@ -4,6 +4,14 @@ from engine import init, step
 
 class TestEngine(TestCase):
     def test_engine_file(self):
+        file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_1.txt'
+        with open(file_name_new, 'r') as f:
+            num_str = 0
+            while num_str < len(f.readlines()):
+
+                num_str += 1
+
+
         file_name = '/home/miron/work/cg-CodeBusters/tests/game_v2_3.txt'
         with open(file_name, 'r') as f:
             lis = ''.join(f.readlines()).split('\n')

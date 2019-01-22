@@ -12,7 +12,7 @@ class Entity:
         self.value = int(value)
 
     def to_string(self):
-        return str(self.id)+' '+str(self.x)+' '+str(self.y)+' '+str(self.type)+' '+str(self.state)+' '+str(self.value)+'\n'
+        return f'{self.id} {self.x} {self.y} {self.type} {self.state} {self.value}\n'
 
 
 def close_ghost(bust, x1, y1, i):

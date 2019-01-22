@@ -3,9 +3,8 @@ import itertools
 import numpy as np
 
 
-#TODO distance to see 2200**2
 DISTANCE_RELEASE = 1600 ** 2
-DISTANCE_SEE = 1760 ** 2
+DISTANCE_SEE = 2200 ** 2
 DISTANCE_STUN = 1760 ** 2
 DISTANCE_BUST = 1760 ** 2
 DISTANCE_BUST_MIN = 900 ** 2
@@ -34,14 +33,6 @@ def fight(my_busters, enemy_busters):
     return dic
 
 
-def distance(a, b):
-    return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
-
-
-def symmetry(x, y):
-    return 16000 - x, 9000 - y
-
-
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
@@ -53,10 +44,16 @@ class Point:
         result, min_distance = None, np.inf
         for target in targets:
             if target.is_filled():
-                dist = distance(self, target)
+                dist = self.distance(target)
                 if dist < min_distance:
                     result, min_distance = target, dist
         return result
+
+    def distance(self, b):
+        return (self.x - b.x) ** 2 + (self.y - b.y) ** 2
+
+    def symmetry(self):
+        return 16000 - self.x, 9000 - self.y
 
 
 class Base(Point):
@@ -64,7 +61,7 @@ class Base(Point):
         Point.__init__(self, x, y)
 
     def can_release(self, buster):
-        return distance(self, buster) <= DISTANCE_RELEASE
+        return self.distance(buster) <= DISTANCE_RELEASE
 
 
 class Buster(Point):
@@ -79,7 +76,7 @@ class Buster(Point):
 
     def can_stun(self, buster):
         return not self.is_stunned() and buster.is_visible and not buster.is_stunned() and \
-               distance(self, buster) <= DISTANCE_STUN and self.reload == 0
+               self.distance(buster) <= DISTANCE_STUN and self.reload == 0
 
     def is_carrying(self):
         return self.state == STATE_CARRYING
@@ -91,7 +88,7 @@ class Buster(Point):
         return self.state == STATE_IDLE
 
     def entities_in_range(self, objects, min_dist, max_dist):
-        return [i for i in objects if i.is_visible and min_dist <= distance(i, self) <= max_dist]
+        return [i for i in objects if i.is_visible and min_dist <= self.distance(i) <= max_dist]
 
     def update(self, x, y, state, value):
         self.is_visible = True
@@ -134,7 +131,7 @@ class Ghost(Point):
         if not self.is_filled():
             return
         for i in list(my_busters.values()) + list(enemy_busters.values()):
-            if i.carry_ghost_id == self.id or i.id in my_busters and distance(i, self) <= DISTANCE_BUST:
+            if i.carry_ghost_id == self.id or i.id in my_busters and self.distance(i) <= DISTANCE_BUST:
                 self.x, self.y = None, None
                 break
 
@@ -147,15 +144,15 @@ class Game:
     def __init__(self, init_lines):
         busters_cnt, ghosts_cnt, my_id = init_lines.split('\n')
         self.points_to_see = [(0, 4500), (0, 9000), (8000, 9000), (4000, 9000), (8000, 0), (4000, 0)]
+        self.points_to_see = [Point(*p) for p in self.points_to_see]
         self.my_id = int(my_id)
         self.enemy_id = int(not self.my_id)
         if self.my_id:
-            self.points_to_see = [symmetry(*i) for i in self.points_to_see]
-        self.points_to_see = [Point(*p) for p in self.points_to_see]
+            self.points_to_see = [Point(*i.symmetry()) for i in self.points_to_see]
         self.busters_cnt = int(busters_cnt)
         self.ghosts_cnt = int(ghosts_cnt)
         self.base = Base(16000 * self.my_id, 9000 * self.my_id)
-        self.enemy_base = Base(*symmetry(self.base.x, self.base.y))
+        self.enemy_base = Base(*self.base.symmetry())
         self.my_ids = list(range(self.busters_cnt * self.my_id, self.busters_cnt * (self.my_id + 1)))
         self.enemy_ids = list(range(self.busters_cnt * self.enemy_id, self.busters_cnt * (self.enemy_id + 1)))
         self.my_busters = Game.fill_objects_dic(Buster, self.my_ids)
@@ -175,7 +172,7 @@ class Game:
             if _type == self.my_id:
                 self.visited_points.append(point)
                 self.points_to_see = [p for p in self.points_to_see
-                                      if distance(p, point) > DISTANCE_SEE]
+                                      if point.distance(p) > DISTANCE_SEE]
             if _type == -1 and not self.ghosts[_id].is_found:
                 found_ghosts.append(_id)
             self.entities[_type][_id].update(x, y, state, value)
@@ -194,9 +191,9 @@ class Game:
         for _id in found_ghosts:
             op_id = _id + (-1, 1)[_id % 2]
             if not self.ghosts[op_id].is_found:
-                op_x, op_y = symmetry(self.ghosts[_id].x, self.ghosts[_id].y)
+                op_x, op_y = self.ghosts[_id].symmetry()
                 op_point = Point(op_x, op_y)
-                position_was_seen = any([distance(p, op_point) < DISTANCE_SEE
+                position_was_seen = any([p.distance(op_point) < DISTANCE_SEE
                                          for p in self.visited_points])
                 if not position_was_seen:
                     self.ghosts[op_id].x = op_x

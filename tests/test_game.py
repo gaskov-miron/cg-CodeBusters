@@ -13,17 +13,17 @@ class TestGame(TestCase):
 
     def test_game_file(self, file_name):
         with open(file_name, 'r') as f:
-            lis = ''.join(f.readlines()).split('\n')
-            g = init(lis[0] + '\n' + lis[1] + '\n' + lis[2])
-            lis = lis[4:]
-            d = []
-            t = ''
-            for i in lis:
+            lines = ''.join(f.readlines()).split('\n')
+            game = init(lines[0] + '\n' + lines[1] + '\n' + lines[2])
+            lines = lines[4:]
+            blocks = []
+            new_block = ''
+            for i in lines:
                 if i != '' and i != '---':
-                    t += i + '\n'
+                    new_block += i + '\n'
                 else:
-                    d.append(t[:-1])
-                    t = ''
-            for i in range(0, len(d), 3):
-                step_out = step(d[i], g)
-                self.assertEqual(step_out, d[i + 1])
+                    blocks.append(new_block[:-1])
+                    new_block = ''
+            for i in range(0, len(blocks), 3):
+                step_out = step(blocks[i], game)
+                self.assertEqual(step_out, blocks[i + 1])
