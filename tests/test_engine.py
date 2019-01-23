@@ -1,15 +1,35 @@
 from unittest import TestCase
-from engine import init, step
+from engine import init, step, Entity
 
 
 class TestEngine(TestCase):
     def test_engine_file(self):
+        blocks = []
+        current_block = None
         file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_1.txt'
-        with open(file_name_new, 'r') as f:
-            num_str = 0
-            while num_str < len(f.readlines()):
 
-                num_str += 1
+        block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
+        block_stoppers = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n', '\n']
+
+        with open(file_name_new, 'r') as f:
+            lines = f.readlines()
+        for line in lines:
+            if line in block_stoppers and current_block is not None:
+                current_block = None
+            if line in block_starters:
+                current_block = []
+                blocks.append(current_block)
+            if current_block is not None and line not in block_stoppers and line not in block_starters:
+                current_block.append(line[:-1])
+
+        busters_count, ghosts_count = blocks[0][:2]
+        del blocks[0], blocks[2]
+        steps1 = list(zip(blocks[0::4], blocks[1::4]))
+        steps2 = list(zip(blocks[2::4], blocks[3::4]))
+        busters1, busters2, ghosts = {}, {}, {}
+
+        e0 = Entity(steps1[0][0][0])
+        f = 0
 
 
         file_name = '/home/miron/work/cg-CodeBusters/tests/game_v2_3.txt'
