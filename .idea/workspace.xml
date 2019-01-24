@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/game_terrar.py" line="19" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/game_terrar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/game_v2_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_engine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="51" column="54" selection-start-line="51" selection-start-column="50" selection-end-line="51" selection-end-column="54" />
+            <state relative-caret-position="390">
+              <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="21" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -32,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+            <state relative-caret-position="315">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -41,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="150">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -86,11 +91,14 @@
         <option value="$PROJECT_DIR$/tests/game5.txt" />
         <option value="$PROJECT_DIR$/tests/game6.txt" />
         <option value="$PROJECT_DIR$/tests/test_game.py" />
-        <option value="$PROJECT_DIR$/engine.py" />
         <option value="$PROJECT_DIR$/solution.py" />
-        <option value="$PROJECT_DIR$/game.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_1.txt" />
+        <option value="$PROJECT_DIR$/tests/new_game.py" />
+        <option value="$PROJECT_DIR$/new_game.py" />
+        <option value="$PROJECT_DIR$/game.py" />
+        <option value="$PROJECT_DIR$/game_terrar.py" />
         <option value="$PROJECT_DIR$/tests/test_engine.py" />
+        <option value="$PROJECT_DIR$/engine.py" />
       </list>
     </option>
   </component>
@@ -108,7 +116,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,15 +146,17 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/pictures" />
-      <recent name="$PROJECT_DIR$/tests" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
@@ -163,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_engine.TestEngine.test_engine_file">
+  <component name="RunManager" selected="Python tests.Unittests in test_engine.py">
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,7 +194,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="solution" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="new_game (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -197,7 +206,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solution.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game_terrar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="new_game" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cg-CodeBusters" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/new_game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -220,7 +250,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_game.TestGame.test_game_files" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in test_engine.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -230,31 +260,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_game.TestGame.test_game_files&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for tests.test_game.TestGame.test_game_files" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="cg-CodeBusters" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_game.TestGame.test_game_files&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_engine.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_engine.TestEngine.test_engine_file" />
+        <item itemvalue="Python tests.Unittests in test_engine.py" />
+        <item itemvalue="Python.new_game (1)" />
         <item itemvalue="Python.game" />
-        <item itemvalue="Python tests.Unittests for test_game.TestGame.test_game_files" />
-        <item itemvalue="Python tests.Unittests for tests.test_game.TestGame.test_game_files" />
-        <item itemvalue="Python.solution" />
+        <item itemvalue="Python.new_game" />
+        <item itemvalue="Python tests.Unittests for test_engine.TestEngine.test_engine_file" />
       </list>
     </recent_temporary>
   </component>
@@ -272,46 +288,47 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 43m 35s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 47m 51s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 44m 37s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 48m 08s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 45m 01s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 49m 46s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 46m 29s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 52m 53s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 50m 14s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 56m 56s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 50m 57s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 57m 07s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 52m 16s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 20h 59m 49s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 54m 43s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 21h 08m 07s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 56m 54s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 21h 08m 22s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.01.23 at 20h 59m 01s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.24 at 21h 13m 29s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1212" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49861497" visible="true" weight="0.18558952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50138503" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49945414" weight="0.3286908" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49945414" visible="true" weight="0.3286908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925718" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -330,8 +347,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/test_engine.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="17" />
+          <line>47</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -344,6 +361,7 @@
         <watch expression="blocks[-1]" language="Python" />
         <watch expression="blocks[2::4]" language="Python" />
         <watch expression="steps1[0][0][0]" language="Python" />
+        <watch expression="current_busters[5].id" />
       </configuration>
     </watches-manager>
   </component>
@@ -451,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.6/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.6/unittest/loader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -523,37 +534,52 @@
     <entry file="file://$PROJECT_DIR$/tests/game1.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_2.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/new_game.py" />
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="79" column="8" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_terrar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.6/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="51" column="54" selection-start-line="51" selection-start-column="50" selection-end-line="51" selection-end-column="54" />
+        <state relative-caret-position="390">
+          <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="21" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+        <state relative-caret-position="315">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
         </state>
       </provider>
     </entry>

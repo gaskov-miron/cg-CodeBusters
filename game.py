@@ -30,7 +30,7 @@ right = False
 animCount = 0
 last_move = 1
 p_lives = 200
-ceck = 30
+ceck = 50
 game = True
 p_x, p_y = 650, 100
 def drawWindow():
@@ -65,7 +65,6 @@ putin = pygame.image.load('pictures/images.jpeg')
 lose = pygame.image.load('pictures/grustniy_tramp.jpeg')
 bullets = []
 while run:
-    pygame.draw.rect(win, (0, 0, 255), (x, y, weight, height))
     clock.tick(50)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

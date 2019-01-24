@@ -1,10 +1,34 @@
 import math
 
 
+class Engine:
+    def __init__(self, busters_cnt, ghosts_cnt, busters, ghosts):
+        self.bust_cnt = busters_cnt
+        self.ghosts_cnt = ghosts_cnt
+        self.busters = busters
+        self.ghosts = ghosts
+        self.busters0 = {i: self.busters[i] for i in list(range(busters_cnt))}
+        self.busters1 = {i: self.busters[i] for i in list(range(busters_cnt, 2 * busters_cnt))}
+        self.players_busters = {0: self.busters0, 1: self.busters1}
+
+    def get_info(self, player_id):
+        ids = []
+        result = ''
+        for i in self.ghosts:
+            x1 = self.ghosts[i].x
+            y1 = self.ghosts[i].y
+            ans = close_ghost(self.players_busters[player_id], x1, y1, i)
+            if ans is not None:
+                ids.append(ans)
+        for i in sorted(ids):
+            result += self.ghosts[i].to_string()
+        return result
+
+
 class Entity:
     def __init__(self, string):
-        id, _type, x, y, state, value = string.split()
-        self.id = int(id)
+        id_, x, y, _type, state, value = string.split()
+        self.id = int(id_)
         self.x = int(x)
         self.y = int(y)
         self.type = int(_type)
