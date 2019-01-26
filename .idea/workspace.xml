@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tank_game.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/gh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Replayer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_engine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,35 +20,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/engine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="50" column="100" selection-start-line="50" selection-start-column="100" selection-end-line="50" selection-end-column="100" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
+        <entry file="file://$PROJECT_DIR$/Replayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+            <state relative-caret-position="581">
+              <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
+        <entry file="file://$PROJECT_DIR$/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="79" column="20" lean-forward="true" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+            <state relative-caret-position="1950">
+              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -103,8 +89,9 @@
         <option value="$PROJECT_DIR$/game_terrar.py" />
         <option value="$PROJECT_DIR$/tank_game.py" />
         <option value="$PROJECT_DIR$/tests/gh" />
-        <option value="$PROJECT_DIR$/engine.py" />
         <option value="$PROJECT_DIR$/tests/test_engine.py" />
+        <option value="$PROJECT_DIR$/engine.py" />
+        <option value="$PROJECT_DIR$/Replayer.py" />
       </list>
     </option>
   </component>
@@ -178,7 +165,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_engine.py">
+  <component name="RunManager" selected="Python.Replayer">
+    <configuration name="Replayer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cg-CodeBusters" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Replayer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -213,27 +221,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game_terrar.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="new_game" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="cg-CodeBusters" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/new_game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -279,11 +266,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Replayer" />
         <item itemvalue="Python tests.Unittests in test_engine.py" />
         <item itemvalue="Python.tank_game" />
         <item itemvalue="Python.game" />
         <item itemvalue="Python.new_game (1)" />
-        <item itemvalue="Python.new_game" />
       </list>
     </recent_temporary>
   </component>
@@ -301,34 +288,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 15h 59m 33s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 10m 30s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 15h 59m 51s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 11m 28s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 00m 39s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 00s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 02m 02s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 12s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 03m 49s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 19s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 04m 03s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 31s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 12m 39s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 40s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 16m 43s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 55s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 17m 15s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 25m 10s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 16h 19m 36s.xml">
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 28m 59s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -356,15 +343,6 @@
     </layout>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/engine.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
         <watch expression="self.ghosts" language="Python" />
@@ -437,13 +415,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.6/unittest/suite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
         </state>
       </provider>
     </entry>
@@ -541,24 +512,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.6/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tank_game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
           <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="72" selection-start-line="72" selection-end-line="76" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -579,29 +536,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/lib/python3.6/unittest/suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.6/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="604" selection-start-line="604" selection-end-line="604" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="79" column="20" lean-forward="true" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+        <state relative-caret-position="630">
+          <caret line="78" column="19" lean-forward="true" selection-start-line="78" selection-start-column="19" selection-end-line="78" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="50" column="100" selection-start-line="50" selection-start-column="100" selection-end-line="50" selection-end-column="100" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1950">
+          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Replayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="581">
+          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

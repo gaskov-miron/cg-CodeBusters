@@ -1,4 +1,3 @@
-import math
 import numpy as np
 
 
@@ -28,6 +27,7 @@ class Engine:
 
     def do(self, player0, player1):
         busters_positions = [(self.busters[i].x, self.busters[i].y) for i in self.busters]
+
         for i in range(len(player0) + len(player1)):
             action = (player0 + player1)[i].split()
             target_x, target_y = int(action[1]), int(action[2])
@@ -35,25 +35,9 @@ class Engine:
 
         for i in self.ghosts:
             if self.ghosts[i].was_seen:
-                target_x = self.ghosts[i].x
-                target_y = self.ghosts[i].y
-                current_x, current_y = target_x, target_y
-                min_d = 25000 ** 2
-                for g in busters_positions:
-                    d = (current_x - g[0]) ** 2 + (current_y - g[1]) ** 2
-                    if min_d > d:
-                        k = True
-                        min_d = d
-                        target_x, target_y = current_x + current_x - g[0], current_y + current_y - g[1]
-                    elif min_d == d:
-                        k = False
-                if k and min_d <= 2200 ** 2 and ((current_x - target_x) != 0 or (current_y - target_y) != 0):
-                    A = math.sqrt(400 ** 2 / (((target_x - current_x) ** 2) + ((target_y - current_y) ** 2)))
-                    x, y = cut(round(current_x + A * (target_x - current_x)),
-                               round(current_y + A * (target_y - current_y)))
-                    self.ghosts[i].x = x
-                    self.ghosts[i].y = y
-
+                closest_points = self.ghosts[i].find_closest_points(busters_positions)
+                if len(closest_points) == 1 and self.ghosts[i].distance_for_tuples(closest_points[0]) > 0:
+                    self.ghosts[i].move_from_direction(*closest_points[0], 400)
             self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
 
 
@@ -100,10 +84,5 @@ class Entity:
         y = max(0, min(new_point[1], 9000))
         self.x, self.y = int(x), int(y)
 
-
-def cut(x, y):
-    if x > 16000: x = 16000
-    if y > 9000: y = 9000
-    if x < 0: x = 0
-    if y < 0: y = 0
-    return x, y
+    def move_from_direction(self, x, y, step):
+        self.move_into_direction(2*self.x - x, 2*self.y - y, step)
