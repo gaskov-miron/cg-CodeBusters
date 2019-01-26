@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 
 class Engine:
@@ -12,17 +13,48 @@ class Engine:
         self.players_busters = {0: self.busters0, 1: self.busters1}
 
     def get_info(self, player_id):
-        ids = []
         result = ''
-        for i in self.ghosts:
-            x1 = self.ghosts[i].x
-            y1 = self.ghosts[i].y
-            ans = close_ghost(self.players_busters[player_id], x1, y1, i)
-            if ans is not None:
-                ids.append(ans)
-        for i in sorted(ids):
-            result += self.ghosts[i].to_string()
+        for i in sorted(self.players_busters[player_id]):
+            result += self.busters[i].to_string()
+
+        for i in sorted(self.players_busters[not player_id]):
+            if self.players_busters[not player_id][i].is_visible_from(self.players_busters[player_id]):
+                result += self.players_busters[not player_id][i].to_string()
+
+        for i in sorted(self.ghosts):
+            if self.ghosts[i].is_visible_from(self.players_busters[player_id]):
+                result += self.ghosts[i].to_string()
         return result
+
+    def do(self, player0, player1):
+        busters_positions = [(self.busters[i].x, self.busters[i].y) for i in self.busters]
+        for i in range(len(player0) + len(player1)):
+            action = (player0 + player1)[i].split()
+            target_x, target_y = int(action[1]), int(action[2])
+            self.busters[i].move_to(target_x, target_y, 800)
+
+        for i in self.ghosts:
+            if self.ghosts[i].was_seen:
+                target_x = self.ghosts[i].x
+                target_y = self.ghosts[i].y
+                current_x, current_y = target_x, target_y
+                min_d = 25000 ** 2
+                for g in busters_positions:
+                    d = (current_x - g[0]) ** 2 + (current_y - g[1]) ** 2
+                    if min_d > d:
+                        k = True
+                        min_d = d
+                        target_x, target_y = current_x + current_x - g[0], current_y + current_y - g[1]
+                    elif min_d == d:
+                        k = False
+                if k and min_d <= 2200 ** 2 and ((current_x - target_x) != 0 or (current_y - target_y) != 0):
+                    A = math.sqrt(400 ** 2 / (((target_x - current_x) ** 2) + ((target_y - current_y) ** 2)))
+                    x, y = cut(round(current_x + A * (target_x - current_x)),
+                               round(current_y + A * (target_y - current_y)))
+                    self.ghosts[i].x = x
+                    self.ghosts[i].y = y
+
+            self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
 
 
 class Entity:
@@ -34,51 +66,39 @@ class Entity:
         self.type = int(_type)
         self.state = int(state)
         self.value = int(value)
+        self.was_seen = False
+
+    def distance(self, entity):
+        return (entity.x - self.x) ** 2 + (entity.y - self.y) ** 2
+
+    def distance_for_tuples(self, entity):
+        return (entity[0] - self.x) ** 2 + (entity[1] - self.y) ** 2
+
+    def is_visible_from(self, busters):
+        return any([self.distance(busters[g]) < 2200 ** 2 for g in busters])
 
     def to_string(self):
         return f'{self.id} {self.x} {self.y} {self.type} {self.state} {self.value}\n'
 
+    def find_closest_points(self, points):
+        min_distance = min([self.distance_for_tuples(i) for i in points])
+        return [i for i in points if self.distance_for_tuples(i) == min_distance]
 
-def close_ghost(bust, x1, y1, i):
-    for g in bust:
-        x2 = bust[g].x
-        y2 = bust[g].y
-        if (x2 - x1) ** 2 + (y2 - y1) ** 2 < 2200 ** 2:
-            return i
-    return None
+    def move_to(self, x, y, max_step):
+        if (self.x - x) ** 2 + (self.y - y) ** 2 <= max_step ** 2:
+            self.x, self.y = x, y
+        else:
+            self.move_into_direction(x, y, max_step)
 
-
-def who_is_visible():
-    a, b = '', ''
-    a_id = []
-    b_id = []
-    global g_bust0, g_bust1, g_ghost, was_seen
-    for i in g_bust0: a += g_bust0[i].to_string()
-    for i in g_bust1: b += g_bust1[i].to_string()
-    for i in g_ghost:
-        x1 = g_ghost[i].x
-        y1 = g_ghost[i].y
-        ans0 = close_ghost(g_bust0, x1, y1, i)
-        ans1 = close_ghost(g_bust1, x1, y1, i)
-        if ans0 is not None: a_id.append(ans0)
-        if ans1 is not None: b_id.append(ans1)
-    seen_enemy_bust0 = []
-    seen_enemy_bust1 = []
-    for i in g_bust0:
-        x1 = g_bust0[i].x
-        y1 = g_bust0[i].y
-        for g in g_bust1:
-            x2 = g_bust1[g].x
-            y2 = g_bust1[g].y
-            if (x2 - x1) ** 2 + (y2 - y1) ** 2 < 2200 ** 2:
-                seen_enemy_bust0.append(int(g))
-                seen_enemy_bust1.append(int(i))
-                break
-    for i in sorted(seen_enemy_bust0): a += g_bust1[i].to_string()
-    for i in sorted(seen_enemy_bust1): b += g_bust0[i].to_string()
-    for i in sorted(a_id): a += g_ghost[i].to_string()
-    for i in sorted(b_id): b += g_ghost[i].to_string()
-    return a, b
+    def move_into_direction(self, x, y, step):
+        target = np.array([x, y])
+        current = np.array([self.x, self.y])
+        direction = target - current
+        direction_norm = direction / np.sqrt(direction @ direction)
+        new_point = np.round(current + direction_norm * step)
+        x = max(0, min(new_point[0], 16000))
+        y = max(0, min(new_point[1], 9000))
+        self.x, self.y = int(x), int(y)
 
 
 def cut(x, y):
@@ -87,85 +107,3 @@ def cut(x, y):
     if x < 0: x = 0
     if y < 0: y = 0
     return x, y
-
-
-def init(busters0, busters1, ghosts):
-    global g_bust0, g_bust1, g_ghost, was_seen
-    was_seen = []
-    g_bust0 = {}
-    g_bust1 = {}
-    g_ghost = {}
-    for i in busters0:
-        g_bust0[int(i)] = Entity(i+' 0 '+busters0[i])
-    for i in busters1:
-        g_bust1[int(i)] = Entity(i+' 1 '+busters1[i])
-    for i in ghosts:
-        g_ghost[int(i)] = Entity(i+' -1 '+ghosts[i])
-    return who_is_visible()
-
-
-def step(step1, step2, n):
-    global g_bust0, g_bust1, g_ghost, was_seen
-    c = []
-    for i in list(g_bust0.values())+list(g_bust1.values()):
-        c.append((i.x, i.y))
-    for i in range(len(step1.split('\n'))):
-        act = step1.split('\n')[i].split()
-        x1, y1 = int(act[1]), int(act[2])
-        x0 = g_bust0[i].x
-        y0 = g_bust0[i].y
-        if x0 != x1 or y0 != y1:
-            A = math.sqrt((800**2)/(((x0-x1)**2)+((y0-y1)**2)))
-            new_x = round(x0 + A*(x1-x0))
-            new_y = round(y0 + A*(y1-y0))
-            if (x1-x0)**2+(y1-y0)**2 < 800**2:
-                g_bust0[i].x = int(act[1])
-                g_bust0[i].y = int(act[2])
-            else:
-                g_bust0[i].x = new_x
-                g_bust0[i].y = new_y
-    l = i + 1
-    for i in range(len(step2.split('\n'))):
-        act = step2.split('\n')[i].split()
-        x1, y1 = int(act[1]), int(act[2])
-        x0 = g_bust1[i+l].x
-        y0 = g_bust1[i+l].y
-        if x0 != x1 or y0 != y1:
-            A = math.sqrt((800**2)/(((x0-x1)**2)+((y0-y1)**2)))
-            new_x = round(x0 + A*(x1-x0))
-            new_y = round(y0 + A*(y1-y0))
-            if (x1-x0)**2+(y1-y0)**2 < 800**2:
-                g_bust1[i+l].x = int(act[1])
-                g_bust1[i+l].y = int(act[2])
-            else:
-                g_bust1[i+l].x = new_x
-                g_bust1[i+l].y = new_y
-    for i in g_ghost:
-        if i in was_seen:
-            k = True
-            x1 = g_ghost[i].x
-            y1 = g_ghost[i].y
-            x0, y0 = x1, y1
-            min_d = 25000**2
-            for g in c:
-                d = (x0-g[0])**2+(y0-g[1])**2
-                if min_d > d:
-                    k = True
-                    min_d = d
-                    x1, y1 = x0+x0-g[0], y0+y0-g[1]
-                elif min_d == d:
-                    k = False
-            if k and min_d <= 2200**2 and ((x0-x1) != 0 or (y0-y1) != 0):
-                A = math.sqrt(400**2/(((x1-x0)**2)+((y1-y0)**2)))
-                x, y = cut(round(x0+A*(x1-x0)), round(y0+A*(y1-y0)))
-                g_ghost[i].x = x
-                g_ghost[i].y = y
-    was_seen = []
-    for i in g_ghost:
-        x1 = g_ghost[i].x
-        y1 = g_ghost[i].y
-        ans0 = close_ghost(g_bust0, x1, y1, i)
-        ans1 = close_ghost(g_bust1, x1, y1, i)
-        if ans0 is not None: was_seen.append(ans0)
-        if ans1 is not None: was_seen.append(ans1)
-    return who_is_visible()
