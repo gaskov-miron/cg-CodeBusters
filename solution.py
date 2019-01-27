@@ -161,8 +161,10 @@ class Game:
         self.entities = {self.my_id: self.my_busters, self.enemy_id: self.enemy_busters, -1: self.ghosts}
         self.visited_points = []
         self.ghosts[0].update(8000, 4500, 0, 0)
+        self.step = 0
 
     def update(self, lines):
+        self.step += 1
         for i in list(self.enemy_busters.values()) + list(self.ghosts.values()):
             i.is_visible = False
         found_ghosts = []
@@ -239,6 +241,30 @@ def step(update_lines, g):
             res += f'MOVE {nearest_point.x} {nearest_point.y}\n'
         else:
             res += f'MOVE {g.enemy_base.x - 2000 * (g.my_id == 0) + 2000 * g.my_id} {g.enemy_base.y - 2200 * (g.my_id == 0) + 2200 * g.my_id}\n'
+    return res[:-1]
+
+
+def step_research(update_lines, g):
+    list_directions = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                  [(3, 1), (3, 1), (3, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                  [(2, 1), (3, 2), (1, 2), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 1)],
+                  [(1, 2), (2, 1), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, -1)]],
+
+                  [[(4, 3), (4, 3), (5, 4), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                  [(1, 2), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)],
+                  [(2, 1), (2, 1), (0, 1), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 0)]],
+
+                  [[(1, 1), (3, 4), (0, 1), (0, 1), (0, 1), (0, 1), (3, 2), (1, 0), (1, -1)],
+                  [(1, 1), (4, 3), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)]]]
+    res = ''
+    g.update(update_lines)
+    for i in g.my_ids:
+        x, y = g.my_busters[i].x, g.my_busters[i].y
+        directions = list_directions[4-g.busters_cnt]
+        if g.my_id == 1 or g.step > 9:
+            res += f'MOVE {g.base.x} {g.base.y}\n'
+        else:
+            res += f'MOVE {x + directions[i][g.step-1][0]*1000} {y + directions[i][g.step-1][1]*1000}\n'
     return res[:-1]
 
 
