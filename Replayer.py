@@ -30,6 +30,13 @@ def drawWindow():
         pygame.draw.circle(win, (0, 0, 255), (current_step.engine.busters[i].x // 10, current_step.engine.busters[i].y // 10), 15)
     for i in current_step.engine.ghosts:
         pygame.draw.circle(win, (0, 255, 0), (current_step.engine.ghosts[i].x // 10, current_step.engine.ghosts[i].y // 10), 15)
+
+
+        pygame.font.init()
+        myfont = pygame.font.SysFont('Comic Sans MS', 30)
+        textsurface = myfont.render(str(i), False, (255, 0, 0))
+        win.blit(textsurface, (current_step.engine.ghosts[i].x // 10, current_step.engine.ghosts[i].y // 10))
+
     pygame.display.update()
 
 

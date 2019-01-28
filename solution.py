@@ -1,6 +1,7 @@
 import sys
 import itertools
 import numpy as np
+import copy as c
 
 
 DISTANCE_RELEASE = 1600 ** 2
@@ -54,6 +55,19 @@ class Point:
 
     def symmetry(self):
         return 16000 - self.x, 9000 - self.y
+
+    def move_into_direction(self, x, y, step_):
+        target = np.array([x, y])
+        current = np.array([self.x, self.y])
+        direction = target - current
+        direction_norm = direction / np.sqrt(direction @ direction)
+        new_point = np.round(current + direction_norm * step_)
+        x = max(0, min(new_point[0], 16000))
+        y = max(0, min(new_point[1], 9000))
+        self.x, self.y = int(x), int(y)
+
+    def move_from_point(self, x, y, step_):
+        self.move_into_direction(2*self.x - x, 2*self.y - y, step_)
 
 
 class Base(Point):
@@ -120,6 +134,7 @@ class Ghost(Point):
         self.is_found = False
         self.id = ghost_id
         self.is_visible = False
+        self.danger_point = None
 
     def update(self, x, y, state, value):
         self.is_found = True
@@ -134,6 +149,25 @@ class Ghost(Point):
             if i.carry_ghost_id == self.id or i.id in my_busters and self.distance(i) <= DISTANCE_BUST:
                 self.x, self.y = None, None
                 break
+        if self.x is not None and self.danger_point is not None:
+            self.move_from_point(self.danger_point.x, self.danger_point.y, 400)
+            self.danger_point = None
+
+    def update_danger_point(self, busters_0, busters_1):
+        min_dist = np.inf
+        new_d_point = None
+        for i in busters_0:
+            if busters_0[i].x is not None and busters_0[i].y is not None:
+                if self.danger_point is None or self.distance(busters_0[i]) < min_dist:
+                    min_dist = self.distance(busters_0[i])
+                    new_d_point = Point(busters_0[i].x, busters_0[i].y)
+        for i in busters_1:
+            if busters_1[i].x is not None and busters_1[i].y is not None:
+                if self.danger_point is None or self.distance(busters_1[i]) < min_dist:
+                    min_dist = self.distance(busters_1[i])
+                    new_d_point = Point(busters_1[i].x, busters_1[i].y)
+        if new_d_point is not None:
+            self.danger_point = c.deepcopy(new_d_point)
 
 
 class Game:
@@ -188,6 +222,8 @@ class Game:
         for i in self.ghosts.values():
             if not i.is_visible:
                 i.update_invisible(self.my_busters, self.enemy_busters)
+            elif self.step > 1:
+                i.update_danger_point(self.my_busters, self.enemy_busters)
 
     def apply_symmetry(self, found_ghosts):
         for _id in found_ghosts:

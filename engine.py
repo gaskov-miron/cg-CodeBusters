@@ -37,7 +37,7 @@ class Engine:
             if self.ghosts[i].was_seen:
                 closest_points = self.ghosts[i].find_closest_points(busters_positions)
                 if len(closest_points) == 1 and self.ghosts[i].distance_for_tuples(closest_points[0]) > 0:
-                    self.ghosts[i].move_from_direction(*closest_points[0], 400)
+                    self.ghosts[i].move_from_point(*closest_points[0], 400)
             self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
 
 
@@ -84,5 +84,5 @@ class Entity:
         y = max(0, min(new_point[1], 9000))
         self.x, self.y = int(x), int(y)
 
-    def move_from_direction(self, x, y, step):
+    def move_from_point(self, x, y, step):
         self.move_into_direction(2*self.x - x, 2*self.y - y, step)
