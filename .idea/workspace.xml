@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Replayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Replayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/game_v2_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/game_v2_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_3.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Replayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+            <state relative-caret-position="1106">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -35,23 +31,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/solution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="254" column="88" selection-start-line="254" selection-start-column="88" selection-end-line="254" selection-end-column="88" />
+            <state relative-caret-position="525">
+              <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="5077" lean-forward="true" selection-start-line="5077" selection-end-line="5077" />
             </state>
           </provider>
         </entry>
@@ -112,8 +99,8 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_2.txt" />
         <option value="$PROJECT_DIR$/tests/game_v2_3.txt" />
-        <option value="$PROJECT_DIR$/Replayer.py" />
         <option value="$PROJECT_DIR$/solution.py" />
+        <option value="$PROJECT_DIR$/Replayer.py" />
       </list>
     </option>
   </component>
@@ -131,7 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,6 +143,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="RecentsManager">
@@ -284,8 +271,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Replayer" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python tests.Unittests in test_engine.py" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.tank_game" />
         <item itemvalue="Python.game" />
       </list>
@@ -305,12 +292,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 10m 30s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 11m 28s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 12m 00s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
@@ -333,6 +314,12 @@
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_test_engine_py - 2019.01.26 at 17h 28m 59s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.28 at 16h 30m 31s.xml">
+      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_engine_py - 2019.01.28 at 16h 30m 42s.xml">
       <configuration name="Unittests in test_engine.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -554,20 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -592,13 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105594">
-          <caret line="65" column="14" lean-forward="true" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="606">
@@ -606,29 +572,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Replayer.py">
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="76155">
+          <caret line="5077" selection-start-line="5077" selection-end-line="5077" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
+    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="5077" lean-forward="true" selection-start-line="5077" selection-end-line="5077" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="78" column="19" lean-forward="true" selection-start-line="78" selection-start-column="19" selection-end-line="78" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-259">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="254" column="88" selection-start-line="254" selection-start-column="88" selection-end-line="254" selection-end-column="88" />
+        <state relative-caret-position="525">
+          <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Replayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1106">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
