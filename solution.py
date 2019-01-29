@@ -1,7 +1,6 @@
 import sys
 import itertools
 import numpy as np
-import copy as c
 
 
 DISTANCE_RELEASE = 1600 ** 2
@@ -13,6 +12,16 @@ DISTANCE_BUST_MIN = 900 ** 2
 STATE_IDLE = 0
 STATE_CARRYING = 1
 STATE_STUNNED = 2
+
+RESEARCH_DIRECTIONS = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                        [(3, 1), (3, 1), (3, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                        [(2, 1), (3, 2), (1, 2), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 1)],
+                        [(1, 2), (2, 1), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, -1)]],
+                       [[(4, 3), (4, 3), (5, 4), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
+                        [(1, 2), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)],
+                        [(2, 1), (2, 1), (0, 1), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 0)]],
+                       [[(1, 1), (3, 4), (0, 1), (0, 1), (0, 1), (0, 1), (3, 2), (1, 0), (1, -1)],
+                        [(1, 1), (4, 3), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)]]]
 
 
 def fight(my_busters, enemy_busters):
@@ -49,6 +58,10 @@ class Point:
                 if dist < min_distance:
                     result, min_distance = target, dist
         return result
+
+    def find_all_nearest(self, targets):
+        min_distance = min([self.distance(i) for i in targets])
+        return [i for i in targets if self.distance(i) == min_distance]
 
     def distance(self, b):
         return (self.x - b.x) ** 2 + (self.y - b.y) ** 2
@@ -87,6 +100,7 @@ class Buster(Point):
         self.state = STATE_IDLE
         self.carry_ghost_id = None
         self.turns_to_stay = 0
+        self.is_mine = False
 
     def can_stun(self, buster):
         return not self.is_stunned() and buster.is_visible and not buster.is_stunned() and \
@@ -142,32 +156,24 @@ class Ghost(Point):
         self.y = y
         self.is_visible = True
 
-    def update_invisible(self, my_busters, enemy_busters):
+    def update_invisible(self, busters):
         if not self.is_filled():
             return
-        for i in list(my_busters.values()) + list(enemy_busters.values()):
-            if i.carry_ghost_id == self.id or i.id in my_busters and self.distance(i) <= DISTANCE_BUST:
+        for i in busters:
+            if i.carry_ghost_id == self.id or i.is_mine and self.distance(i) <= DISTANCE_BUST:
                 self.x, self.y = None, None
                 break
         if self.x is not None and self.danger_point is not None:
             self.move_from_point(self.danger_point.x, self.danger_point.y, 400)
             self.danger_point = None
 
-    def update_danger_point(self, busters_0, busters_1):
-        min_dist = np.inf
-        new_d_point = None
-        for i in busters_0:
-            if busters_0[i].x is not None and busters_0[i].y is not None:
-                if self.danger_point is None or self.distance(busters_0[i]) < min_dist:
-                    min_dist = self.distance(busters_0[i])
-                    new_d_point = Point(busters_0[i].x, busters_0[i].y)
-        for i in busters_1:
-            if busters_1[i].x is not None and busters_1[i].y is not None:
-                if self.danger_point is None or self.distance(busters_1[i]) < min_dist:
-                    min_dist = self.distance(busters_1[i])
-                    new_d_point = Point(busters_1[i].x, busters_1[i].y)
-        if new_d_point is not None:
-            self.danger_point = c.deepcopy(new_d_point)
+    def update_danger_point(self, busters):
+        visible_busters = [i for i in busters if i.is_visible]
+        nearest_busters = self.find_all_nearest(visible_busters)
+        if 0 < self.distance(nearest_busters[0]) <= 2200**2 and len(nearest_busters) == 1:
+            self.danger_point = Point(nearest_busters[0].x, nearest_busters[0].y)
+        else:
+            self.danger_point = None
 
 
 class Game:
@@ -193,6 +199,9 @@ class Game:
         self.enemy_busters = Game.fill_objects_dic(Buster, self.enemy_ids)
         self.ghosts = Game.fill_objects_dic(Ghost, range(self.ghosts_cnt))
         self.entities = {self.my_id: self.my_busters, self.enemy_id: self.enemy_busters, -1: self.ghosts}
+        for i in self.my_busters.values():
+            i.is_mine = True
+        self.busters = list(self.my_busters.values()) + list(self.enemy_busters.values())
         self.visited_points = []
         self.ghosts[0].update(8000, 4500, 0, 0)
         self.step = 0
@@ -221,9 +230,9 @@ class Game:
                 i.update_invisible()
         for i in self.ghosts.values():
             if not i.is_visible:
-                i.update_invisible(self.my_busters, self.enemy_busters)
+                i.update_invisible(self.busters)
             elif self.step > 1:
-                i.update_danger_point(self.my_busters, self.enemy_busters)
+                i.update_danger_point(self.busters)
 
     def apply_symmetry(self, found_ghosts):
         for _id in found_ghosts:
@@ -259,6 +268,10 @@ def step(update_lines, g):
         if buster.is_carrying():
             res += f'MOVE {g.base.x} {g.base.y}\n'
             continue
+        if g.step <= 9:
+            dx, dy = get_research_direction(g.my_id, g.step, i, g.busters_cnt)
+            res += f'MOVE {g.my_busters[i].x + dx} {g.my_busters[i].y + dy}\n'
+            continue
         can_catch_ghosts = buster.entities_in_range(g.ghosts.values(), DISTANCE_BUST_MIN, DISTANCE_BUST)
         if len(can_catch_ghosts) != 0:
             res += f'BUST {can_catch_ghosts[0].id}\n'
@@ -280,38 +293,36 @@ def step(update_lines, g):
     return res[:-1]
 
 
+def get_research_direction(my_id, step, buster_id, busters_cnt):
+    if my_id == 0:
+        return RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step-1][0]*1000, \
+               RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step-1][1]*1000
+    else:
+        return -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step-1][0]*1000, \
+               -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step-1][1]*1000
+
+
 def step_research(update_lines, g):
-    list_directions = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
-                  [(3, 1), (3, 1), (3, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
-                  [(2, 1), (3, 2), (1, 2), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 1)],
-                  [(1, 2), (2, 1), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, -1)]],
-
-                  [[(4, 3), (4, 3), (5, 4), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
-                  [(1, 2), (1, 2), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)],
-                  [(2, 1), (2, 1), (0, 1), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 0)]],
-
-                  [[(1, 1), (3, 4), (0, 1), (0, 1), (0, 1), (0, 1), (3, 2), (1, 0), (1, -1)],
-                  [(1, 1), (4, 3), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)]]]
     res = ''
     g.update(update_lines)
     for i in g.my_ids:
         x, y = g.my_busters[i].x, g.my_busters[i].y
-        directions = list_directions[4-g.busters_cnt]
-        if g.my_id == 1 or g.step > 9:
+        if g.step > 9:
             res += f'MOVE {g.base.x} {g.base.y}\n'
         else:
-            res += f'MOVE {x + directions[i][g.step-1][0]*1000} {y + directions[i][g.step-1][1]*1000}\n'
+            dx, dy = get_research_direction(g.my_id, g.step, i, g.busters_cnt)
+            res += f'MOVE {x + dx} {y + dy}\n'
     return res[:-1]
 
 
 if __name__ == '__main__':
     init_line = input() + '\n' + input() + '\n' + input()
     g = init(init_line)
-    print(init_line + '\n---', file=sys.stderr)
+    print('INIT:\n' + init_line, file=sys.stderr)
     while True:
         entities = int(input())
         update = '\n'.join([' '.join([j for j in input().split()]) for i in range(entities)])
-        print(update + '\n---', file=sys.stderr)
+        print('INPUT:\n' + update, file=sys.stderr)
         out = step(update, g)
-        print(out, file=sys.stderr)
+        print('OUTPUT:\n' + out, file=sys.stderr)
         print(out)
