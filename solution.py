@@ -3,6 +3,9 @@ import itertools
 import numpy as np
 
 
+MAX_X = 16000
+MAX_Y = 9000
+
 DISTANCE_RELEASE = 1600 ** 2
 DISTANCE_SEE = 2200 ** 2
 DISTANCE_STUN = 1760 ** 2
@@ -12,6 +15,8 @@ DISTANCE_BUST_MIN = 900 ** 2
 STATE_IDLE = 0
 STATE_CARRYING = 1
 STATE_STUNNED = 2
+
+GHOST_STEP = 400
 
 RESEARCH_DIRECTIONS = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
                         [(3, 1), (3, 1), (3, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
@@ -50,37 +55,31 @@ class Point:
     def is_filled(self):
         return self.x is not None and self.y is not None
 
-    def find_nearest(self, targets):
-        result, min_distance = None, np.inf
-        for target in targets:
-            if target.is_filled():
-                dist = self.distance(target)
-                if dist < min_distance:
-                    result, min_distance = target, dist
-        return result
-
     def find_all_nearest(self, targets):
-        min_distance = min([self.distance(i) for i in targets])
-        return [i for i in targets if self.distance(i) == min_distance]
+        filled_targets = [i for i in targets if i.is_filled()]
+        if len(filled_targets) == 0:
+            return None
+        min_distance = min([self.distance(i) for i in filled_targets])
+        return [i for i in filled_targets if self.distance(i) == min_distance]
 
     def distance(self, b):
         return (self.x - b.x) ** 2 + (self.y - b.y) ** 2
 
     def symmetry(self):
-        return 16000 - self.x, 9000 - self.y
+        return MAX_X - self.x, MAX_Y - self.y
 
-    def move_into_direction(self, x, y, step_):
-        target = np.array([x, y])
+    def move_toward(self, point, distance):
+        target = np.array([point.x, point.y])
         current = np.array([self.x, self.y])
         direction = target - current
         direction_norm = direction / np.sqrt(direction @ direction)
-        new_point = np.round(current + direction_norm * step_)
-        x = max(0, min(new_point[0], 16000))
-        y = max(0, min(new_point[1], 9000))
+        new_point = np.round(current + direction_norm * distance)
+        x = max(0, min(new_point[0], MAX_X))
+        y = max(0, min(new_point[1], MAX_Y))
         self.x, self.y = int(x), int(y)
 
-    def move_from_point(self, x, y, step_):
-        self.move_into_direction(2*self.x - x, 2*self.y - y, step_)
+    def move_backward(self, point, distance):
+        self.move_toward(Point(2 * self.x - point.x, 2 * self.y - point.y), distance)
 
 
 class Base(Point):
@@ -116,7 +115,7 @@ class Buster(Point):
         return self.state == STATE_IDLE
 
     def entities_in_range(self, objects, min_dist, max_dist):
-        return [i for i in objects if i.is_visible and min_dist <= self.distance(i) <= max_dist]
+        return [i for i in objects if i.is_filled() and min_dist <= self.distance(i) <= max_dist]
 
     def update(self, x, y, state, value):
         self.is_visible = True
@@ -135,11 +134,13 @@ class Buster(Point):
             self.turns_to_stay = 0
 
     def update_invisible(self):
-        self.x = None
-        self.y = None
-        self.state = STATE_IDLE
-        self.carry_ghost_id = None
-        self.turns_to_stay = 0
+        self.turns_to_stay -= 1 * (self.turns_to_stay > 0)
+        self.reload -= 1 * (self.reload > 0)
+        if self.turns_to_stay == 0:
+            self.x = None
+            self.y = None
+            self.state = STATE_IDLE
+            self.carry_ghost_id = None
 
 
 class Ghost(Point):
@@ -149,31 +150,35 @@ class Ghost(Point):
         self.id = ghost_id
         self.is_visible = False
         self.danger_point = None
+        self.stamina = None
+        self.busters_cnt = None
 
     def update(self, x, y, state, value):
         self.is_found = True
         self.x = x
         self.y = y
         self.is_visible = True
+        self.stamina = state
+        self.busters_cnt = value
 
     def update_invisible(self, busters):
+        # update busters_cnt and stamina appropriately
+        self.busters_cnt = None
         if not self.is_filled():
             return
         for i in busters:
-            if i.carry_ghost_id == self.id or i.is_mine and self.distance(i) <= DISTANCE_BUST:
+            if i.carry_ghost_id == self.id or i.is_mine and self.distance(i) <= DISTANCE_BUST: # fix to DISTANCE_SEE
                 self.x, self.y = None, None
                 break
-        if self.x is not None and self.danger_point is not None:
-            self.move_from_point(self.danger_point.x, self.danger_point.y, 400)
+        if self.is_filled() and self.danger_point is not None:
+            self.move_backward(self.danger_point, GHOST_STEP)
             self.danger_point = None
 
     def update_danger_point(self, busters):
-        visible_busters = [i for i in busters if i.is_visible]
-        nearest_busters = self.find_all_nearest(visible_busters)
+        self.danger_point = None
+        nearest_busters = self.find_all_nearest(busters)
         if 0 < self.distance(nearest_busters[0]) <= 2200**2 and len(nearest_busters) == 1:
             self.danger_point = Point(nearest_busters[0].x, nearest_busters[0].y)
-        else:
-            self.danger_point = None
 
 
 class Game:
@@ -191,7 +196,7 @@ class Game:
             self.points_to_see = [Point(*i.symmetry()) for i in self.points_to_see]
         self.busters_cnt = int(busters_cnt)
         self.ghosts_cnt = int(ghosts_cnt)
-        self.base = Base(16000 * self.my_id, 9000 * self.my_id)
+        self.base = Base(MAX_X * self.my_id, MAX_Y * self.my_id)
         self.enemy_base = Base(*self.base.symmetry())
         self.my_ids = list(range(self.busters_cnt * self.my_id, self.busters_cnt * (self.my_id + 1)))
         self.enemy_ids = list(range(self.busters_cnt * self.enemy_id, self.busters_cnt * (self.enemy_id + 1)))
@@ -203,7 +208,7 @@ class Game:
             i.is_mine = True
         self.busters = list(self.my_busters.values()) + list(self.enemy_busters.values())
         self.visited_points = []
-        self.ghosts[0].update(8000, 4500, 0, 0)
+        self.ghosts[0].update(MAX_X//2, MAX_Y//2, 0, 0)
         self.step = 0
 
     def update(self, lines):
@@ -231,7 +236,7 @@ class Game:
         for i in self.ghosts.values():
             if not i.is_visible:
                 i.update_invisible(self.busters)
-            elif self.step > 1:
+            elif self.step > 1: # change elif with if
                 i.update_danger_point(self.busters)
 
     def apply_symmetry(self, found_ghosts):
@@ -252,9 +257,8 @@ def init(init_lines):
     return Game(init_lines)
 
 
-def step(update_lines, g):
+def step(g):
     res = ''
-    g.update(update_lines)
     attacks = fight(g.my_busters, g.enemy_busters)
     for i in g.my_ids:
         buster = g.my_busters[i]
@@ -281,30 +285,29 @@ def step(update_lines, g):
             res += f'MOVE {buster.x} {buster.y}\n'
             continue
         if len(g.ghosts) != 0:
-            nearest_ghost = buster.find_nearest(g.ghosts.values())
-            if nearest_ghost is not None:
-                res += f'MOVE {nearest_ghost.x} {nearest_ghost.y}\n'
+            nearest_ghosts = buster.find_all_nearest(g.ghosts.values())
+            if nearest_ghosts is not None:
+                res += f'MOVE {nearest_ghosts[0].x} {nearest_ghosts[0].y}\n'
                 continue
         if len(g.points_to_see) != 0:
-            nearest_point = buster.find_nearest(g.points_to_see)
-            res += f'MOVE {nearest_point.x} {nearest_point.y}\n'
+            nearest_points = buster.find_all_nearest(g.points_to_see)
+            res += f'MOVE {nearest_points[0].x} {nearest_points[0].y}\n'
         else:
             res += f'MOVE {g.enemy_base.x - 2000 * (g.my_id == 0) + 2000 * g.my_id} {g.enemy_base.y - 2200 * (g.my_id == 0) + 2200 * g.my_id}\n'
     return res[:-1]
 
 
-def get_research_direction(my_id, step, buster_id, busters_cnt):
+def get_research_direction(my_id, step_id, buster_id, busters_cnt):
     if my_id == 0:
-        return RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step-1][0]*1000, \
-               RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step-1][1]*1000
+        return RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step_id - 1][0] * 1000, \
+               RESEARCH_DIRECTIONS[4-busters_cnt][buster_id][step_id - 1][1] * 1000
     else:
-        return -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step-1][0]*1000, \
-               -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step-1][1]*1000
+        return -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step_id - 1][0] * 1000, \
+               -RESEARCH_DIRECTIONS[4-busters_cnt][buster_id - busters_cnt][step_id - 1][1] * 1000
 
 
-def step_research(update_lines, g):
+def step_research(g):
     res = ''
-    g.update(update_lines)
     for i in g.my_ids:
         x, y = g.my_busters[i].x, g.my_busters[i].y
         if g.step > 9:
@@ -317,12 +320,13 @@ def step_research(update_lines, g):
 
 if __name__ == '__main__':
     init_line = input() + '\n' + input() + '\n' + input()
-    g = init(init_line)
+    game = init(init_line)
     print('INIT:\n' + init_line, file=sys.stderr)
     while True:
         entities = int(input())
         update = '\n'.join([' '.join([j for j in input().split()]) for i in range(entities)])
         print('INPUT:\n' + update, file=sys.stderr)
-        out = step(update, g)
+        game.update(update)
+        out = step(game)
         print('OUTPUT:\n' + out, file=sys.stderr)
         print(out)

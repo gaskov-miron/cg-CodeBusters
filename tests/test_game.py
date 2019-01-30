@@ -29,5 +29,6 @@ class TestGame(TestCase):
         game = init('\n'.join(blocks[0]))
         del blocks[0]
         for i in range(0, len(blocks), 2):
-            step_out = step('\n'.join(blocks[i]), game)
+            game.update('\n'.join(blocks[i]))
+            step_out = step(game)
             self.assertEqual(step_out, '\n'.join(blocks[i + 1]))

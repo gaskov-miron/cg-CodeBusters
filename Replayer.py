@@ -5,12 +5,10 @@ import copy as c
 
 
 class State:
-    def __init__(self, engine, player0, player1, action0, action1):
+    def __init__(self, engine, player0, player1):
         self.engine = engine
         self.player0 = player0
         self.player1 = player1
-        self.action0 = action0
-        self.action1 = action1
 
 
 def drawWindow():
@@ -76,11 +74,9 @@ for step_ in zip(steps1, steps2):
 
 states = []
 engine = Engine(busters_count, ghosts_count, busters, ghosts)
-current_step = State(engine,
-                     player0,
-                     player1,
-                     step_research(engine.get_info(0)[:-1], player0).split('\n'),
-                     step_research(engine.get_info(1)[:-1], player1).split('\n'))
+player0.update(engine.get_info(0)[:-1])
+player1.update(engine.get_info(1)[:-1])
+current_step = State(engine, player0, player1)
 
 i = 0
 while i < len(steps1):
@@ -90,9 +86,11 @@ while i < len(steps1):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 states.append(c.deepcopy(current_step))
-                current_step.engine.do(current_step.action0, current_step.action1)
-                current_step.action0 = step_research(current_step.engine.get_info(0)[:-1], current_step.player0).split('\n')
-                current_step.action1 = step_research(current_step.engine.get_info(1)[:-1], current_step.player1).split('\n')
+                action0 = step_research(current_step.player0).split('\n')
+                action1 = step_research(current_step.player1).split('\n')
+                current_step.engine.do(action0, action1)
+                current_step.player0.update(current_step.engine.get_info(0)[:-1])
+                current_step.player1.update(current_step.engine.get_info(1)[:-1])
                 i += 1
             if event.key == pygame.K_LEFT:
                 if i > 0:
