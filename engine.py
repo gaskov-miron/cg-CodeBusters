@@ -21,8 +21,9 @@ class Engine:
                 result += self.players_busters[not player_id][i].to_string()
 
         for i in sorted(self.ghosts):
-            if self.ghosts[i].is_visible_from(self.players_busters[player_id]):
-                result += self.ghosts[i].to_string()
+            if self.ghosts[i].x is not None and self.ghosts[i].y is not None:
+                if self.ghosts[i].is_visible_from(self.players_busters[player_id]):
+                    result += self.ghosts[i].to_string()
         return result
 
     def do(self, player0, player1):
@@ -30,15 +31,42 @@ class Engine:
 
         for i in range(len(player0) + len(player1)):
             action = (player0 + player1)[i].split()
-            target_x, target_y = int(action[1]), int(action[2])
-            self.busters[i].move_to(target_x, target_y, 800)
+            if action[0] == 'MOVE':
+                target_x, target_y = int(action[1]), int(action[2])
+                self.busters[i].move_to(target_x, target_y, 800)
+
+            if action[0] == 'BUST':
+                target_id = int(action[1])
+                self.busters[i].state = 3
+                if self.ghosts[target_id].state > 0:
+                    self.ghosts[target_id].state -= 1
+                self.ghosts[target_id].value += 1
+                self.busters[i].value = target_id
+            if action[0] == 'RELEASE':
+                released_ghost = self.ghosts[self.busters[i].value]
+                self.busters[i].value = -1
+                self.busters[i].state = 0
+                released_ghost.x = self.busters[i].x
+                released_ghost.y = self.busters[i].y
+                if released_ghost.distance_for_tuples((0, 0)) <= 1600**2 or 1600**2 >= released_ghost.distance_for_tuples((16000, 9000)):
+                    released_ghost.x = None
+                    released_ghost.y = None
 
         for i in self.ghosts:
-            if self.ghosts[i].was_seen:
+            if self.ghosts[i].was_seen and self.ghosts[i].value == 0 and self.ghosts[i].x is not None:
                 closest_points = self.ghosts[i].find_closest_points(busters_positions)
                 if len(closest_points) == 1 and self.ghosts[i].distance_for_tuples(closest_points[0]) > 0:
                     self.ghosts[i].move_from_point(*closest_points[0], 400)
-            self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
+
+            if self.ghosts[i].state == 0 and self.ghosts[i].value == 1:
+                self.ghosts[i].x = None
+                self.ghosts[i].y = None
+                for b in self.busters:
+                    if self.busters[b].value == i:
+                        self.busters[b].state = 1
+
+            if self.ghosts[i].x is not None and self.ghosts[i].y is not None:
+                self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
 
 
 class Entity:

@@ -42,5 +42,8 @@ class TestEngine(TestCase):
             b = g.get_info(1)
             self.assertEqual(a[:-1], '\n'.join(steps1[i][0]))
             self.assertEqual(b[:-1], '\n'.join(steps2[i][0]))
+            for id_g in g.ghosts:
+                g.ghosts[id_g].value = 0
             if i < len(steps1)-1:
                 g.do(steps1[i][1], steps2[i][1])
+
