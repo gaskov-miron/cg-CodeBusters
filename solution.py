@@ -262,10 +262,10 @@ def step(g):
     attacks = fight(g.my_busters, g.enemy_busters)
     for i in g.my_ids:
         buster = g.my_busters[i]
-        if i in attacks:
-            res += f'STUN {attacks[i]}\n'
-            g.my_busters[i].reload = 20
-            continue
+        #if i in attacks:
+        #    res += f'STUN {attacks[i]}\n'
+        #    g.my_busters[i].reload = 20
+        #    continue
         if buster.is_carrying() and g.base.can_release(buster):
             res += 'RELEASE\n'
             continue

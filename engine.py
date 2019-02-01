@@ -10,6 +10,8 @@ class Engine:
         self.busters0 = {i: self.busters[i] for i in list(range(busters_cnt))}
         self.busters1 = {i: self.busters[i] for i in list(range(busters_cnt, 2 * busters_cnt))}
         self.players_busters = {0: self.busters0, 1: self.busters1}
+        self.score_1 = 0
+        self.score_2 = 0
 
     def get_info(self, player_id):
         result = ''
@@ -27,6 +29,9 @@ class Engine:
         return result
 
     def do(self, player0, player1):
+        for id_g in self.ghosts:
+            self.ghosts[id_g].value = 0
+
         busters_positions = [(self.busters[i].x, self.busters[i].y) for i in self.busters]
 
         for i in range(len(player0) + len(player1)):
@@ -48,7 +53,12 @@ class Engine:
                 self.busters[i].state = 0
                 released_ghost.x = self.busters[i].x
                 released_ghost.y = self.busters[i].y
-                if released_ghost.distance_for_tuples((0, 0)) <= 1600**2 or 1600**2 >= released_ghost.distance_for_tuples((16000, 9000)):
+                if released_ghost.distance_for_tuples((0, 0)) <= 1600**2:
+                    self.score_1 += 1
+                    released_ghost.x = None
+                    released_ghost.y = None
+                elif 1600**2 >= released_ghost.distance_for_tuples((16000, 9000)):
+                    self.score_2 += 1
                     released_ghost.x = None
                     released_ghost.y = None
 
