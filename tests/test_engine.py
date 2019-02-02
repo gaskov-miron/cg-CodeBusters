@@ -6,7 +6,7 @@ class TestEngine(TestCase):
     def test_engine_file(self):
         blocks = []
         current_block = None
-        file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_2.txt'
+        file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_4s.txt'
 
         block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
         block_stoppers = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n', '\n']
@@ -38,7 +38,7 @@ class TestEngine(TestCase):
         g = Engine(busters_count, ghosts_count, busters, ghosts)
 
         for i in range(len(steps1)):
-            print(i)
+            #print(i)
             a = g.get_info(0)
             b = g.get_info(1)
             self.assertEqual('\n'.join(steps1[i][0]), a[:-1])

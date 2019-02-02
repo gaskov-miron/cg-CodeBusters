@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/game_v2_4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/game_v2_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/game_v2_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_engine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="122" column="52" selection-start-line="122" selection-start-column="52" selection-end-line="122" selection-end-column="52" />
+            <state relative-caret-position="219">
+              <caret line="169" column="34" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -44,10 +43,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
+        <entry file="file://$PROJECT_DIR$/tests/game_v2_4.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="7428" selection-start-line="7428" selection-end-line="7428" />
+            <state relative-caret-position="594">
+              <caret line="5537" lean-forward="true" selection-start-line="5537" selection-end-line="5537" />
             </state>
           </provider>
         </entry>
@@ -92,6 +91,7 @@
       <find>400</find>
       <find>State(</find>
       <find>v2_2</find>
+      <find>is_visible_from</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,6 +122,7 @@
         <option value="$PROJECT_DIR$/Replayer.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_1.txt" />
         <option value="$PROJECT_DIR$/tests/game_v2_3.txt" />
+        <option value="$PROJECT_DIR$/tests/game_v2_4.txt" />
         <option value="$PROJECT_DIR$/engine.py" />
         <option value="$PROJECT_DIR$/tests/test_engine.py" />
       </list>
@@ -294,39 +295,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 45m 50s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 30m 02s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 41s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 30m 53s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 47s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 05s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 52s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 09s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 57s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 12s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 50m 46s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 31s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 50m 55s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 38s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 55m 51s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 46s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 56m 06s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 52s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 56m 15s.xml">
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 57s.xml">
       <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
+    <frame x="64" y="-11" width="1857" height="1212" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49861497" visible="true" weight="0.18558952" />
@@ -374,6 +375,11 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>self.step == 47</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>self.step == 152</expression-string>
         <language-id>Python</language-id>
@@ -670,15 +676,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
+        <state relative-caret-position="111420">
           <caret line="7428" selection-start-line="7428" selection-end-line="7428" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="122" column="52" selection-start-line="122" selection-start-column="52" selection-end-line="122" selection-end-column="52" />
+        <state relative-caret-position="219">
+          <caret line="169" column="34" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="5537" lean-forward="true" selection-start-line="5537" selection-end-line="5537" />
         </state>
       </provider>
     </entry>

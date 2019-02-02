@@ -16,17 +16,27 @@ class Engine:
 
     def get_info(self, player_id):
         result = ''
+        visible_entities = []
         for i in sorted(self.players_busters[player_id]):
             result += self.busters[i].to_string()
+        returned_ids_ghosts = []
+        returned_ids_busters = []
+        for i in sorted(self.players_busters[player_id]):
+            if self.players_busters[player_id][i].is_radar:
+                distance = 4400
+                self.players_busters[player_id][i].is_radar = False
+            else:
+                distance = 2200
+            visible_entities += self.players_busters[player_id][i].who_is_visible(list(self.players_busters[not player_id].values()) + list(self.ghosts.values()), distance)
 
-        for i in sorted(self.players_busters[not player_id]):
-            if self.players_busters[not player_id][i].is_visible_from(self.players_busters[player_id]):
-                result += self.players_busters[not player_id][i].to_string()
-
-        for i in sorted(self.ghosts):
-            if self.ghosts[i].x is not None and self.ghosts[i].y is not None:
-                if self.ghosts[i].is_visible_from(self.players_busters[player_id]):
-                    result += self.ghosts[i].to_string()
+        for b in sorted(visible_entities, key=lambda e: e.id):
+            if b.type == int(not player_id) and b.id not in returned_ids_busters:
+                result += b.to_string()
+                returned_ids_busters.append(b.id)
+        for g in sorted(visible_entities, key=lambda e: e.id):
+            if g.type == -1 and g.id not in returned_ids_ghosts:
+                result += g.to_string()
+                returned_ids_ghosts.append(g.id)
         return result
 
     def do(self, player0, player1):
@@ -80,6 +90,11 @@ class Engine:
                     self.busters[i].state = 0
                     self.ghosts[self.busters[i].value].move_to(int(action[1]), int(action[2]), 1760)
                     self.busters[i].value = -1
+
+                if action[0] == 'RADAR':
+                    if self.busters[i].state == 1 and self.busters[i].used_radar is False:
+                        self.busters[i].is_radar = True
+                    self.busters[i].used_radar = True
 
         for id_b in self.busters:
             if self.busters[id_b].state == 2:
@@ -137,6 +152,8 @@ class Entity:
         self.was_seen = False
         self.time_not_bust = 0
         self.time_not_eject = 0
+        self.used_radar = False
+        self.is_radar = False
 
     def distance(self, entity):
         return (entity.x - self.x) ** 2 + (entity.y - self.y) ** 2
@@ -146,6 +163,13 @@ class Entity:
 
     def is_visible_from(self, busters):
         return any([self.distance(busters[g]) < 2200 ** 2 for g in busters])
+
+    def who_is_visible(self, entities, distance):
+        ans = []
+        for i in entities:
+            if i.x is not None and self.distance(i) <= distance ** 2:
+                ans += [i]
+        return ans
 
     def to_string(self):
         return f'{self.id} {self.x} {self.y} {self.type} {self.state} {self.value}\n'
