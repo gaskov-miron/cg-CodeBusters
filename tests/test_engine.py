@@ -38,10 +38,11 @@ class TestEngine(TestCase):
         g = Engine(busters_count, ghosts_count, busters, ghosts)
 
         for i in range(len(steps1)):
+            print(i)
             a = g.get_info(0)
             b = g.get_info(1)
-            self.assertEqual(a[:-1], '\n'.join(steps1[i][0]))
-            self.assertEqual(b[:-1], '\n'.join(steps2[i][0]))
+            self.assertEqual('\n'.join(steps1[i][0]), a[:-1])
+            self.assertEqual('\n'.join(steps2[i][0]), b[:-1])
             if i < len(steps1) - 1:
                 g.do(steps1[i][1], steps2[i][1])
 

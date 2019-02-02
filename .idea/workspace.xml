@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Replayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Replayer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/game_v2_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/game_v2_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game_v2_3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_engine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,44 +22,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Replayer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="106" column="21" lean-forward="true" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
+            <state relative-caret-position="435">
+              <caret line="122" column="52" selection-start-line="122" selection-start-column="52" selection-end-line="122" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/game_v2_2.txt">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-107496">
-              <caret line="767" selection-start-line="767" selection-end-line="767" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/solution.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3975">
-              <caret line="267" column="8" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="654">
+              <caret line="7428" selection-start-line="7428" selection-end-line="7428" />
             </state>
           </provider>
         </entry>
@@ -103,6 +91,7 @@
       <find>9000</find>
       <find>400</find>
       <find>State(</find>
+      <find>v2_2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,7 +103,6 @@
         <option value="$PROJECT_DIR$/test_game.py" />
         <option value="$PROJECT_DIR$/tests/game.txt" />
         <option value="$PROJECT_DIR$/pictures/game.py" />
-        <option value="$PROJECT_DIR$/tests/game_v2_1.txt" />
         <option value="$PROJECT_DIR$/tests/new_game.py" />
         <option value="$PROJECT_DIR$/new_game.py" />
         <option value="$PROJECT_DIR$/game.py" />
@@ -122,7 +110,6 @@
         <option value="$PROJECT_DIR$/tank_game.py" />
         <option value="$PROJECT_DIR$/tests/gh" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/tests/game_v2_3.txt" />
         <option value="$PROJECT_DIR$/tests/game2.txt" />
         <option value="$PROJECT_DIR$/tests/game3.txt" />
         <option value="$PROJECT_DIR$/tests/game4.txt" />
@@ -132,9 +119,11 @@
         <option value="$PROJECT_DIR$/tests/test_game.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_2.txt" />
         <option value="$PROJECT_DIR$/solution.py" />
-        <option value="$PROJECT_DIR$/tests/test_engine.py" />
-        <option value="$PROJECT_DIR$/engine.py" />
         <option value="$PROJECT_DIR$/Replayer.py" />
+        <option value="$PROJECT_DIR$/tests/game_v2_1.txt" />
+        <option value="$PROJECT_DIR$/tests/game_v2_3.txt" />
+        <option value="$PROJECT_DIR$/engine.py" />
+        <option value="$PROJECT_DIR$/tests/test_engine.py" />
       </list>
     </option>
   </component>
@@ -152,7 +141,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -178,16 +166,17 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/pictures" />
-      <recent name="$PROJECT_DIR$/tests" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tests" />
     </key>
   </component>
@@ -203,7 +192,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Replayer">
+  <component name="RunManager" selected="Python tests.Unittests for test_engine.TestEngine.test_engine_file">
     <configuration name="Replayer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -283,9 +272,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_engine.TestEngine.test_engine_file" />
         <item itemvalue="Python.Replayer" />
         <item itemvalue="Python tests.Unittests in test_engine.py" />
-        <item itemvalue="Python tests.Unittests for test_engine.TestEngine.test_engine_file" />
         <item itemvalue="Python tests.Unittests for test_game.TestGame.test_game_files" />
         <item itemvalue="Python tests.Unittests in test_game.py" />
       </list>
@@ -305,39 +294,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 02m 21s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 45m 50s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 03m 08s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 41s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 04m 18s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 47s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 38m 33s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 52s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 39m 46s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 47m 57s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 40m 11s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 50m 46s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 40m 49s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 50m 55s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 18h 41m 10s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 55m 51s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 22h 58m 55s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 56m 06s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_engine_py - 2019.01.31 at 23h 11m 05s.xml">
-      <configuration name="Unittests in test_engine.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 13h 56m 15s.xml">
+      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1212" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49861497" visible="true" weight="0.18558952" />
@@ -373,6 +362,8 @@
     <watches-manager>
       <configuration name="tests">
         <watch expression="self.ghosts" language="Python" />
+        <watch expression="self.busters" language="Python" />
+        <watch expression="(i, self.busters[3].state)" language="Python" />
       </configuration>
       <configuration name="PythonConfigurationType">
         <watch expression="blocks[0]" language="Python" />
@@ -384,6 +375,41 @@
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
       <expression>
+        <expression-string>self.step == 152</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.step == 40 and i == 5</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.step == 40</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.step == 40 and i == 3</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>i == 6 and self.step == 40</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>i == 6 and self.step == 39</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>i == 6</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>i.id == 10</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -393,23 +419,33 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>i == 10</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e1 != e2</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>len(dic) &gt; 0</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="watch">
+      <expression>
+        <expression-string>max(bust0, bust1)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(i, self.busters[3].state)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.busters[3]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.buster[3]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.busters</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>current_step.engine.ghosts[9]</expression-string>
         <language-id>Python</language-id>
@@ -432,31 +468,6 @@
       </expression>
       <expression>
         <expression-string>self.visited_points</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.y</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.x</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.danger_point.y</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.danger_point.x</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.danger_point</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -523,20 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76155">
-          <caret line="5077" selection-start-line="5077" selection-end-line="5077" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="78" column="19" lean-forward="true" selection-start-line="78" selection-start-column="19" selection-end-line="78" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -600,13 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.6/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="666">
@@ -628,16 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/solution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3975">
-          <caret line="267" column="8" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -647,36 +627,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
+    <entry file="file://$PROJECT_DIR$/Replayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="44" column="35" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
+        <state relative-caret-position="607">
+          <caret line="106" column="22" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="22" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="267" column="8" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107496">
+        <state relative-caret-position="654">
           <caret line="767" selection-start-line="767" selection-end-line="767" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.6/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="604" selection-start-line="604" selection-end-line="604" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="3408" lean-forward="true" selection-start-line="3408" selection-end-line="3408" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="654">
+          <caret line="7428" selection-start-line="7428" selection-end-line="7428" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
+        <state relative-caret-position="435">
+          <caret line="122" column="52" selection-start-line="122" selection-start-column="52" selection-end-line="122" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Replayer.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="106" column="21" lean-forward="true" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
+        <state relative-caret-position="120">
+          <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
