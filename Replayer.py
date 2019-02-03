@@ -1,6 +1,6 @@
 import pygame
 from engine import Entity, Engine
-from solution import Game, step_research, step
+from solution import Game, step, step_old
 import copy as c
 
 
@@ -13,9 +13,9 @@ class State:
 def drawWindow():
     win.blit(bg, (0, 0))
 
-    #for i in current_step.player0.ghosts:
-    #    if current_step.player0.ghosts[i].x is not None:
-    #        pygame.draw.circle(win, (100, 100, 100), (current_step.player0.ghosts[i].x // 10,current_step.player0.ghosts[i].y // 10), 16)
+    for i in current_step.player0.ghosts:
+        if current_step.player0.ghosts[i].x is not None:
+            pygame.draw.circle(win, (100, 100, 100), (current_step.player0.ghosts[i].x // 10,current_step.player0.ghosts[i].y // 10), 16)
     #for state_ in states+[current_step]:
     #    for i in state_.engine.busters:
     #        pygame.draw.circle(win, (100, 100, 100), (state_.engine.busters[i].x // 10, state_.engine.busters[i].y // 10), 220)
@@ -27,6 +27,9 @@ def drawWindow():
     for i in current_step.engine.busters0:
         buster = current_step.engine.busters0[i]
         pygame.draw.circle(win, (0, 0, 255), (buster.x // 10, buster.y // 10), 15)
+        if buster.state == 2:
+            pygame.draw.line(win, (0, 0, 0), (buster.x // 10 - 10, buster.y // 10 - 10), (buster.x // 10 + 10, buster.y // 10 + 10), 2)
+            pygame.draw.line(win, (0, 0, 0), (buster.x // 10 + 10, buster.y // 10 - 10), (buster.x // 10 - 10, buster.y // 10 + 10), 2)
         if buster.state == 3:
             ghost = current_step.engine.ghosts[buster.value]
             pygame.draw.line(win, (255, 0, 0), (buster.x // 10, buster.y // 10), (ghost.x // 10, ghost.y // 10), 4)
@@ -35,6 +38,9 @@ def drawWindow():
     for i in current_step.engine.busters1:
         buster = current_step.engine.busters1[i]
         pygame.draw.circle(win, (200, 0, 255), (buster.x // 10, buster.y // 10), 15)
+        if buster.state == 2:
+            pygame.draw.line(win, (0, 0, 0), (buster.x // 10 - 10, buster.y // 10 - 10), (buster.x // 10 + 10, buster.y // 10 + 10), 2)
+            pygame.draw.line(win, (0, 0, 0), (buster.x // 10 + 10, buster.y // 10 - 10), (buster.x // 10 - 10, buster.y // 10 + 10), 2)
         if buster.state == 3:
             ghost = current_step.engine.ghosts[buster.value]
             pygame.draw.line(win, (255, 0, 0), (buster.x // 10, buster.y // 10), (ghost.x // 10, ghost.y // 10), 4)
@@ -49,9 +55,13 @@ def drawWindow():
             myfont = pygame.font.SysFont('Comic Sans MS', 20)
             textsurface = myfont.render(str(i), False, (0, 0, 0))
             win.blit(textsurface, (current_step.engine.ghosts[i].x // 10, current_step.engine.ghosts[i].y // 10))
-            myfont = pygame.font.SysFont('Comic Sans MS', 20)
+
             textsurface = myfont.render(str(current_step.engine.ghosts[i].state), False, (0, 0, 0))
             win.blit(textsurface, (current_step.engine.ghosts[i].x // 10, current_step.engine.ghosts[i].y // 10 - 30))
+    #for i in player0.ghosts:
+        #if current_step.engine.ghosts[i].x is not None:
+            #textsurface = myfont.render(str(player0.ghosts[i].my_busters_cnt), False, (0, 0, 0))
+            #win.blit(textsurface, (current_step.engine.ghosts[i].x // 10 - 20, current_step.engine.ghosts[i].y // 10 - 30))
 
     myfont = pygame.font.SysFont('Comic Sans MS', 20)
     textsurface = myfont.render('SCORE '+str(current_step.engine.score_1), False, (0, 0, 0))
@@ -65,7 +75,7 @@ def drawWindow():
 
 blocks = []
 current_block = None
-file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_2.txt'
+file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_4.txt'
 block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
 block_stoppers = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n', '\n']
 win = pygame.display.set_mode((1600, 900))
@@ -112,7 +122,7 @@ while i < len(steps1):
             if event.key == pygame.K_RIGHT:
                 states.append(c.deepcopy(current_step))
                 action0 = step(current_step.player0).split('\n')
-                action1 = step(current_step.player1).split('\n')
+                action1 = step_old(current_step.player1).split('\n')
                 current_step.engine.do(action0, action1)
                 current_step.player0.update(current_step.engine.get_info(0)[:-1])
                 current_step.player1.update(current_step.engine.get_info(1)[:-1])
