@@ -50,6 +50,15 @@ def fight(my_busters, enemy_busters):
     return dic
 
 
+def find_targets(g, R):
+    list_of_targets = []
+    for i in g.ghosts:
+        if g.ghosts[i].x is not None:
+            if g.ghosts[i].stamina <= 3 and g.ghosts[i].distance(g.enemy_base) > R ** 2:
+                list_of_targets.append(g.ghosts[i])
+    return list_of_targets
+
+
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
@@ -330,6 +339,7 @@ def step_old(g):
 def step(g):
     res = ''
     attacks = fight(g.my_busters, g.enemy_busters)
+    R = 6500
     for i in g.my_ids:
         buster = g.my_busters[i]
         if i in attacks:
@@ -346,16 +356,25 @@ def step(g):
             dx, dy = get_research_direction(g.my_id, g.step, i, g.busters_cnt)
             res += f'MOVE {g.my_busters[i].x + dx} {g.my_busters[i].y + dy}\n'
             continue
-        can_catch_ghosts = buster.entities_in_range(g.ghosts.values(), DISTANCE_BUST_MIN, DISTANCE_BUST)
+        list_of_targets = find_targets(g, R)
+        if len(list_of_targets) == 0:
+            #nearest_ghosts = buster.find_all_nearest(list_of_targets)
+            #for i in range(len(list_of_targets)):
+            #    if list_of_targets[i].id == nearest_ghosts.id:
+            #        del list_of_targets[i]
+            list_of_targets = list(g.ghosts.values())[:]
+        #print(list_of_targets)
+        #list_of_targets = list(g.ghosts.values())[:]
+        can_catch_ghosts = buster.entities_in_range(list_of_targets, DISTANCE_BUST_MIN, DISTANCE_BUST)
         if len(can_catch_ghosts) != 0:
             res += f'BUST {can_catch_ghosts[0].id}\n'
             continue
-        close_ghosts = buster.entities_in_range(g.ghosts.values(), 0, DISTANCE_BUST_MIN)
+        close_ghosts = buster.entities_in_range(list_of_targets, 0, DISTANCE_BUST_MIN)
         if len(close_ghosts) != 0:
             res += f'MOVE {buster.x} {buster.y}\n'
             continue
         if len(g.ghosts) != 0:
-            nearest_ghosts = buster.find_all_nearest(g.ghosts.values())
+            nearest_ghosts = buster.find_all_nearest(list_of_targets)
             if nearest_ghosts is not None:
                 res += f'MOVE {nearest_ghosts[0].x} {nearest_ghosts[0].y}\n'
                 continue
