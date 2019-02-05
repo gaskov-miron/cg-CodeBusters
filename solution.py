@@ -20,6 +20,8 @@ STATE_TRAPPING = 3
 GHOST_STEP = 400
 BUSTER_STEP = 800
 
+META_R = 7000
+
 RESEARCH_DIRECTIONS = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
                         [(3, 1), (3, 1), (3, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)],
                         [(2, 1), (3, 2), (1, 2), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 1)],
@@ -29,6 +31,21 @@ RESEARCH_DIRECTIONS = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1),
                         [(2, 1), (2, 1), (0, 1), (0, 1), (0, 1), (0, 1), (0, 1), (1, 1), (1, 0)]],
                        [[(1, 1), (3, 4), (0, 1), (0, 1), (0, 1), (0, 1), (3, 2), (1, 0), (1, -1)],
                         [(1, 1), (4, 3), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)]]]
+
+
+def chose_ghosts(enemy_base, ghosts):
+    targets = {}
+    for ghost_id in ghosts:
+        if ghosts[ghost_id].is_filled() and enemy_base.distance(ghosts[ghost_id]) > META_R ** 2:
+            targets[ghost_id] = ghosts[ghost_id]
+    return targets
+
+
+def discount(my_base, enemy_base, entity):
+    #return (entity.distance(my_base) - entity.distance(enemy_base)) // 1000
+    if entity.distance(my_base) > entity.distance(enemy_base):
+        return -10
+    return 0
 
 
 def fight(my_busters, enemy_busters):
@@ -50,14 +67,16 @@ def fight(my_busters, enemy_busters):
     return dic
 
 
-def find_targets(my_busters, ghosts):
+def find_targets(my_busters, ghosts, my_base, enemy_base):
+    ghosts = chose_ghosts(enemy_base, ghosts)
     targets = []
     best_var, best_score = None, None
     my_busters_ids = list(sorted(my_busters))
     for i in my_busters_ids:
-        targets.append([-1] + [j for j in ghosts if ghosts[j].is_filled() and
-                               ghosts[j].enemy_busters_cnt <= ghosts[j].my_busters_cnt and
-                               not my_busters[i].is_carrying() and ghosts[j].stamina <= 3])
+        targets.append([-1] + [j for j in ghosts
+                               if ghosts[j].enemy_busters_cnt <= ghosts[j].my_busters_cnt and
+                               not my_busters[i].is_carrying() and ghosts[j].stamina <= 3 and
+                               len(my_busters[i].killers) == 0])
     for i in itertools.product(*targets):
         selected_ghosts_ids = [j for j in i if j != -1]
         if len(set(selected_ghosts_ids)) != len(selected_ghosts_ids):
@@ -68,7 +87,7 @@ def find_targets(my_busters, ghosts):
                 continue
             buster, ghost = my_busters[my_busters_ids[k]], ghosts[i[k]]
             busters_cnt += 1
-            steps_cnt += buster.turns_to_bust(ghost) + buster.turns_to_stay + ghost.stamina
+            steps_cnt += buster.turns_to_bust(ghost) + buster.turns_to_stay + ghost.stamina + discount(my_base, enemy_base, ghost)
         if best_var is None or (busters_cnt, -steps_cnt) > best_score:
             best_score = (busters_cnt, -steps_cnt)
             best_var = i
@@ -134,6 +153,7 @@ class Buster(Point):
         self.is_mine = False
         self.bust_ghost_id = None
         self.base = None
+        self.killers = []
 
     def turns_to_bust(self, entity):
         if not entity.is_filled():
@@ -143,7 +163,8 @@ class Buster(Point):
         return np.ceil((np.sqrt(self.distance(entity)) - np.sqrt(DISTANCE_BUST)) / BUSTER_STEP)
 
     def can_stun(self, buster):
-        return not self.is_stunned() and buster.is_visible and not buster.is_stunned() and \
+        return not self.is_stunned() and self.is_visible and \
+               buster.is_visible and not buster.is_stunned() and \
                self.distance(buster) <= DISTANCE_STUN and self.reload == 0
 
     def is_carrying(self):
@@ -224,13 +245,13 @@ class Ghost(Point):
         if self.stamina <= 0:
             self.stamina, self.x, self.y = 0, None, None
             return
+        if self.danger_point is not None and self.busters_cnt == 0:
+            self.move_backward(self.danger_point, GHOST_STEP)
+            self.danger_point = None
         for i in busters:
             if i.carry_ghost_id == self.id or i.is_mine and self.distance(i) <= DISTANCE_SEE:
                 self.x, self.y = None, None
                 break
-        if self.is_filled() and self.danger_point is not None and self.busters_cnt == 0:
-            self.move_backward(self.danger_point, GHOST_STEP)
-            self.danger_point = None
 
     def update_danger_point(self, busters):
         self.danger_point = None
@@ -308,6 +329,8 @@ class Game:
                 for b in self.my_busters.values():
                     if b.bust_ghost_id == i.id:
                         i.my_busters_cnt += 1
+        for b in self.my_busters.values():
+            b.killers = [e for e in self.enemy_busters.values() if e.can_stun(b)]
 
     def apply_symmetry(self, found_ghosts):
         for _id in found_ghosts:
@@ -371,8 +394,7 @@ def step_old(g):
 def step(g):
     res = ''
     attacks = fight(g.my_busters, g.enemy_busters)
-    targets = find_targets(g.my_busters, g.ghosts)
-    R = 6500
+    targets = find_targets(g.my_busters, g.ghosts, g.base, g.enemy_base)
     for i in g.my_ids:
         buster = g.my_busters[i]
         if i in attacks:

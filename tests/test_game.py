@@ -5,11 +5,11 @@ from solution import init, step
 class TestGame(TestCase):
     def test_game_files(self):
         self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game1.txt')
-        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game2.txt')
-        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game3.txt')
-        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game4.txt')
-        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game5.txt')
-        self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game6.txt')
+        #self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game2.txt')
+        #self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game3.txt')
+        #self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game4.txt')
+        #self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game5.txt')
+        #self.test_game_file('/home/miron/work/cg-CodeBusters/tests/game6.txt')
 
     def test_game_file(self, file_name):
         block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
@@ -30,5 +30,6 @@ class TestGame(TestCase):
         del blocks[0]
         for i in range(0, len(blocks), 2):
             game.update('\n'.join(blocks[i]))
+            print(game.step, game.ghosts[1].is_filled())
             step_out = step(game)
             self.assertEqual(step_out, '\n'.join(blocks[i + 1]))

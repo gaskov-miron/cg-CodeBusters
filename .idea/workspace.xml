@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="815177d3-fdf7-4fee-bfb5-5aaf9c2c3f02" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/game1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/game1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_game.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Replayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
+            <state relative-caret-position="1800">
               <caret line="123" selection-start-line="123" selection-end-line="123" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -33,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="59" selection-end-line="435" selection-end-column="18" />
+            <state relative-caret-position="402">
+              <caret line="251" column="67" lean-forward="true" selection-start-line="251" selection-start-column="67" selection-end-line="251" selection-end-column="67" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -43,22 +47,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_game.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/tests/game1.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/game1.txt">
+        <entry file="file://$PROJECT_DIR$/tests/test_game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31020">
-              <caret line="2068" selection-start-line="2068" selection-end-line="2068" />
+            <state relative-caret-position="525">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,14 +74,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sufa</find>
-      <find>surf</find>
-      <find>bg</find>
-      <find>win</find>
-      <find>.busters</find>
-      <find>.values(</find>
-      <find>values</find>
-      <find>.values</find>
       <find>find_nearest</find>
       <find>find_nea</find>
       <find>move_back</find>
@@ -102,8 +94,16 @@
       <find>move_backward</find>
       <find>GHOST_STEP</find>
       <find>move_tow</find>
-      <find>find_targets</find>
       <find>entities_in_range</find>
+      <find>R</find>
+      <find>find_targets</find>
+      <find>can_stune</find>
+      <find>can_</find>
+      <find>can_stun</find>
+      <find>for e in</find>
+      <find>can_stune(</find>
+      <find>not can</find>
+      <find>can_stun(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -126,17 +126,17 @@
         <option value="$PROJECT_DIR$/tests/game3.txt" />
         <option value="$PROJECT_DIR$/tests/game4.txt" />
         <option value="$PROJECT_DIR$/tests/game5.txt" />
-        <option value="$PROJECT_DIR$/tests/game1.txt" />
         <option value="$PROJECT_DIR$/tests/game6.txt" />
-        <option value="$PROJECT_DIR$/tests/test_game.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_2.txt" />
         <option value="$PROJECT_DIR$/tests/game_v2_1.txt" />
         <option value="$PROJECT_DIR$/tests/game_v2_3.txt" />
         <option value="$PROJECT_DIR$/tests/game_v2_4.txt" />
-        <option value="$PROJECT_DIR$/engine.py" />
-        <option value="$PROJECT_DIR$/tests/test_engine.py" />
         <option value="$PROJECT_DIR$/tests/game_v2_5.txt" />
         <option value="$PROJECT_DIR$/Replayer.py" />
+        <option value="$PROJECT_DIR$/tests/test_engine.py" />
+        <option value="$PROJECT_DIR$/engine.py" />
+        <option value="$PROJECT_DIR$/tests/game1.txt" />
+        <option value="$PROJECT_DIR$/tests/test_game.py" />
         <option value="$PROJECT_DIR$/solution.py" />
       </list>
     </option>
@@ -206,7 +206,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Replayer">
+  <component name="RunManager" selected="Python tests.Unittests for test_game.TestGame.test_game_files">
     <configuration name="Replayer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cg-CodeBusters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -286,10 +286,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Replayer" />
         <item itemvalue="Python tests.Unittests for test_game.TestGame.test_game_files" />
-        <item itemvalue="Python tests.Unittests in test_game.py" />
         <item itemvalue="Python tests.Unittests for test_engine.TestEngine.test_engine_file" />
+        <item itemvalue="Python.Replayer" />
+        <item itemvalue="Python tests.Unittests in test_game.py" />
         <item itemvalue="Python tests.Unittests in test_engine.py" />
       </list>
     </recent_temporary>
@@ -308,34 +308,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_engine_TestEngine_test_engine_file - 2019.02.02 at 21h 31m 57s.xml">
-      <configuration name="Unittests for test_engine.TestEngine.test_engine_file" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_game_py - 2019.02.03 at 16h 05m 36s.xml">
-      <configuration name="Unittests in test_game.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 05m 41s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 20h 54m 35s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 06m 35s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 20h 55m 01s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 06m 44s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 20h 58m 47s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_game_py - 2019.02.03 at 16h 18m 36s.xml">
-      <configuration name="Unittests in test_game.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 20m 19s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 20h 59m 22s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 32m 47s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 00m 55s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 16h 47m 08s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 01m 47s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.03 at 17h 13m 42s.xml">
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 02m 27s.xml">
+      <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 03m 08s.xml">
+      <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 03m 38s.xml">
+      <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_game_TestGame_test_game_files - 2019.02.05 at 21h 04m 21s.xml">
       <configuration name="Unittests for test_game.TestGame.test_game_files" configurationId="tests" />
     </history-entry>
   </component>
@@ -348,8 +348,8 @@
       <window_info id="Favorites" order="2" sideWeight="0.50138503" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49945414" visible="true" weight="0.33983287" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.33240482" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49945414" weight="0.33983287" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.33240482" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -365,6 +365,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="self.step == 23 and i.id == 1" language="Python" />
+          <url>file://$PROJECT_DIR$/solution.py</url>
+          <line>320</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -375,14 +383,33 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
-        <watch expression="self.ghosts" language="Python" />
-        <watch expression="self.busters" language="Python" />
-        <watch expression="(i, self.busters[3].state)" language="Python" />
+        <watch expression="game.ghosts[1]" language="Python" />
+        <watch expression="self.ghosts[1]" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>self.step == 23 and i.id == 1</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.step == 23 and i.id == 1</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.step == 22</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.step == 23</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>self.step == 47</expression-string>
         <language-id>Python</language-id>
@@ -413,28 +440,38 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>i == 6 and self.step == 39</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>i == 6</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>i.id == 10</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>i</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="watch">
+      <expression>
+        <expression-string>self.ghosts[1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.ghosts[1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.ghosts[1].is_filled()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.ghosts[1].is_filled</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>game.step</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>g.step</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>[j for j in ghosts if ghosts[j].is_filled() and ghosts[j].enemy_busters_cnt == 0]</expression-string>
         <language-id>Python</language-id>
@@ -447,36 +484,6 @@
       </expression>
       <expression>
         <expression-string>ghosts</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>len(i)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>max(bust0, bust1)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(i, self.busters[3].state)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.busters[3]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.buster[3]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.busters</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -613,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="3408" lean-forward="true" selection-start-line="3408" selection-end-line="3408" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/game_v2_3.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111420">
@@ -641,23 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="169" column="34" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.6/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -667,26 +650,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/gh" />
     <entry file="file://$PROJECT_DIR$/tests/game_v2_5.txt" />
-    <entry file="file://$PROJECT_DIR$/tests/test_game.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+        <state relative-caret-position="75">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/game1.txt">
+    <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31020">
-          <caret line="2068" selection-start-line="2068" selection-end-line="2068" />
+        <state relative-caret-position="-300">
+          <caret line="80" column="39" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Replayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
+        <state relative-caret-position="1800">
           <caret line="123" selection-start-line="123" selection-end-line="123" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -694,10 +677,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_v2_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="3408" lean-forward="true" selection-start-line="3408" selection-end-line="3408" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game1.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="59" selection-end-line="435" selection-end-column="18" />
+        <state relative-caret-position="402">
+          <caret line="251" column="67" lean-forward="true" selection-start-line="251" selection-start-column="67" selection-end-line="251" selection-end-column="67" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
