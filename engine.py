@@ -53,15 +53,18 @@ class Engine:
                 if action[0] == 'MOVE':
                     target_x, target_y = int(action[1]), int(action[2])
                     self.busters[i].move_to(target_x, target_y, 800)
+                    if self.busters[i].state == 3:
+                        self.busters[i].state = 0
 
                 if action[0] == 'BUST':
                     target_id = int(action[1])
-                    self.busters[i].state = 3
-                    if self.ghosts[target_id].state > 0:
-                        self.ghosts[target_id].state -= 1
-                    self.ghosts[target_id].value += 1
-                    self.ghosts[target_id].time_not_bust = 0
-                    self.busters[i].value = target_id
+                    if 900 ** 2 < self.ghosts[target_id].distance(self.busters[i]) < 1760 ** 2:
+                        self.busters[i].state = 3
+                        if self.ghosts[target_id].state > 0:
+                            self.ghosts[target_id].state -= 1
+                        self.ghosts[target_id].value += 1
+                        self.ghosts[target_id].time_not_bust = 0
+                        self.busters[i].value = target_id
 
                 if action[0] == 'RELEASE':
                     released_ghost = self.ghosts[self.busters[i].value]
@@ -69,7 +72,7 @@ class Engine:
                     self.busters[i].state = 0
                     released_ghost.x = self.busters[i].x
                     released_ghost.y = self.busters[i].y
-                    if released_ghost.distance_for_tuples((0, 0)) <= 1600**2:
+                    if released_ghost.distance_for_tuples((0, 0)) <= 1600 ** 2:
                         self.score_1 += 1
                         released_ghost.x = None
                         released_ghost.y = None
@@ -79,9 +82,11 @@ class Engine:
                         released_ghost.y = None
 
                 if action[0] == 'STUN':
-                    self.busters[i].state = 0
-                    self.busters[i].value = -1
-                    stun_bust_id.append(int(action[1]))
+                    if self.busters[i].state != 1:
+                        self.busters[i].state = 0
+                        self.busters[i].value = -1
+                    if self.busters[i].distance(self.busters[int(action[1])]) < 1760 ** 2:
+                        stun_bust_id.append(int(action[1]))
 
                 if action[0] == 'EJECT':
                     self.ghosts[self.busters[i].value].x = self.busters[i].x
@@ -103,6 +108,13 @@ class Engine:
                 else:
                     self.busters[id_b].state = 0
                     self.busters[id_b].value = -1
+
+        for i in stun_bust_id:
+            if self.busters[i].state == 1:
+                self.ghosts[self.busters[i].value].x = self.busters[i].x
+                self.ghosts[self.busters[i].value].y = self.busters[i].y
+            self.busters[i].state = 2
+            self.busters[i].value = 10
 
         for i in self.ghosts:
             if self.ghosts[i].time_not_bust > 1 and self.ghosts[i].was_seen and self.ghosts[i].value == 0 and self.ghosts[i].x is not None:
@@ -132,12 +144,6 @@ class Engine:
                 self.ghosts[i].y = None
             if self.ghosts[i].x is not None and self.ghosts[i].y is not None:
                 self.ghosts[i].was_seen = self.ghosts[i].is_visible_from(self.busters)
-        for i in stun_bust_id:
-            if self.busters[i].state == 1:
-                self.ghosts[self.busters[i].value].x = self.busters[i].x
-                self.ghosts[self.busters[i].value].y = self.busters[i].y
-            self.busters[i].state = 2
-            self.busters[i].value = 10
 
 
 class Entity:

@@ -30,6 +30,6 @@ class TestGame(TestCase):
         del blocks[0]
         for i in range(0, len(blocks), 2):
             game.update('\n'.join(blocks[i]))
-            print(game.step, game.ghosts[1].is_filled())
+            print(game.step, game.ghosts[10].is_filled())
             step_out = step(game)
             self.assertEqual(step_out, '\n'.join(blocks[i + 1]))

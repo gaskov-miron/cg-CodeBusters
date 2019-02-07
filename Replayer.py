@@ -1,6 +1,7 @@
 import pygame
 from engine import Entity, Engine
 from solution import Game, step, step_old
+#from PUSH import push
 import copy as c
 
 
@@ -9,6 +10,7 @@ class State:
         self.engine = engine
         self.player0 = player0
         self.player1 = player1
+
 
 def drawWindow():
     win.blit(bg, (0, 0))
@@ -75,7 +77,7 @@ def drawWindow():
 
 blocks = []
 current_block = None
-file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_4.txt'
+file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_3.txt'
 block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
 block_stoppers = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n', '\n']
 win = pygame.display.set_mode((1600, 900))
@@ -132,6 +134,7 @@ while i < len(steps1):
                     i -= 1
                     current_step = states[i]
                     del states[i]
+
     if i == len(steps1) - 1:
         pygame.quit()
     drawWindow()

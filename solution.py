@@ -51,8 +51,14 @@ def discount(my_base, enemy_base, entity):
 def fight(my_busters, enemy_busters):
     targets = []
     best_var, best_score = None, None
+    to_eject = []
     for i in sorted(my_busters):
-        targets.append([-1] + [j for j in enemy_busters if my_busters[i].can_stun(enemy_busters[j])])
+        if my_busters[i].is_carrying():
+            if len(my_busters[i].killers) > 0:
+                to_eject.append(i)
+            targets.append([-1])
+        else:
+            targets.append([-1] + [j for j in enemy_busters if my_busters[i].can_stun(enemy_busters[j])])
     for i in itertools.product(*targets):
         stunned_enemies_ids = [j for j in i if j != -1]
         if len(set(stunned_enemies_ids)) != len(stunned_enemies_ids):
@@ -64,6 +70,8 @@ def fight(my_busters, enemy_busters):
             best_score = (released_ghosts_cnt, stunned_enemies_cnt)
     dic = {i: best_var[j] for j, i in enumerate(sorted(my_busters))
            if best_var[j] != -1}
+    for i in to_eject:
+        dic[i] = -1
     return dic
 
 
@@ -192,6 +200,9 @@ class Buster(Point):
         if self.is_stunned():
             self.carry_ghost_id = None
             self.turns_to_stay = value
+            if self.turns_to_stay == 10 and len(self.killers) == 1:
+                self.killers[0].reload = 20
+
         elif self.is_carrying():
             self.carry_ghost_id = value
             self.turns_to_stay = 0
@@ -199,14 +210,19 @@ class Buster(Point):
             self.carry_ghost_id = None
             self.turns_to_stay = 0
 
-    def update_invisible(self):
+    def update_invisible(self, busters):
         self.turns_to_stay -= 1 * (self.turns_to_stay > 0)
         self.reload -= 1 * (self.reload > 0)
         if self.is_carrying():
             if not self.base.can_release(self):
                 self.move_toward(self.base, BUSTER_STEP)
-                return
-        if self.turns_to_stay == 0:
+            for i in busters:
+                if i.is_mine and self.distance(i) <= DISTANCE_SEE:
+                    self.x, self.y = None, None
+                    self.state = STATE_IDLE
+                    self.carry_ghost_id = None
+                    break
+        elif self.turns_to_stay == 0:
             self.x = None
             self.y = None
             self.state = STATE_IDLE
@@ -242,7 +258,7 @@ class Ghost(Point):
         self.busters_cnt -= self.my_busters_cnt
         self.my_busters_cnt = 0
         self.stamina -= self.busters_cnt
-        if self.stamina <= 0:
+        if self.stamina <= 0 and self.busters_cnt > 0:
             self.stamina, self.x, self.y = 0, None, None
             return
         if self.danger_point is not None and self.busters_cnt == 0:
@@ -315,7 +331,7 @@ class Game:
         self.apply_symmetry(found_ghosts)
         for i in self.enemy_busters.values():
             if not i.is_visible:
-                i.update_invisible()
+                i.update_invisible(self.busters)
 
         for i in self.ghosts.values():
             if not i.is_visible:
@@ -398,8 +414,11 @@ def step(g):
     for i in g.my_ids:
         buster = g.my_busters[i]
         if i in attacks:
-            res += f'STUN {attacks[i]}\n'
-            g.my_busters[i].reload = 20
+            if attacks[i] == -1:
+                res += f'EJECT {g.base.x} {g.base.y}\n'
+            else:
+                res += f'STUN {attacks[i]}\n'
+                g.my_busters[i].reload = 20
             continue
         if buster.is_carrying() and g.base.can_release(buster):
             res += 'RELEASE\n'
