@@ -1,7 +1,7 @@
 import pygame
 from engine import Entity, Engine
 from solution import Game, step, step_old
-#from PUSH import push
+from PUSH import push
 import copy as c
 
 
@@ -124,7 +124,7 @@ while i < len(steps1):
             if event.key == pygame.K_RIGHT:
                 states.append(c.deepcopy(current_step))
                 action0 = step(current_step.player0).split('\n')
-                action1 = step_old(current_step.player1).split('\n')
+                action1 = push(current_step.player1).split('\n')
                 current_step.engine.do(action0, action1)
                 current_step.player0.update(current_step.engine.get_info(0)[:-1])
                 current_step.player1.update(current_step.engine.get_info(1)[:-1])

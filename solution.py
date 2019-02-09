@@ -33,21 +33,6 @@ RESEARCH_DIRECTIONS = [[[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1),
                         [(1, 1), (4, 3), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0), (1, 0)]]]
 
 
-def chose_ghosts(enemy_base, ghosts):
-    targets = {}
-    for ghost_id in ghosts:
-        if ghosts[ghost_id].is_filled() and enemy_base.distance(ghosts[ghost_id]) > META_R ** 2:
-            targets[ghost_id] = ghosts[ghost_id]
-    return targets
-
-
-def discount(my_base, enemy_base, entity):
-    #return (entity.distance(my_base) - entity.distance(enemy_base)) // 1000
-    if entity.distance(my_base) > entity.distance(enemy_base):
-        return -10
-    return 0
-
-
 def fight(my_busters, enemy_busters):
     targets = []
     best_var, best_score = None, None
@@ -76,34 +61,46 @@ def fight(my_busters, enemy_busters):
 
 
 def find_targets(my_busters, ghosts, my_base, enemy_base):
-    ghosts = chose_ghosts(enemy_base, ghosts)
+    ghosts = {i.id: i for i in ghosts.values() if i.is_filled()}
     targets = []
     best_var, best_score = None, None
-    my_busters_ids = list(sorted(my_busters))
-    for i in my_busters_ids:
-        targets.append([-1] + [j for j in ghosts
-                               if ghosts[j].enemy_busters_cnt <= ghosts[j].my_busters_cnt and
-                               not my_busters[i].is_carrying() and ghosts[j].stamina <= 3 and
-                               len(my_busters[i].killers) == 0])
-    for i in itertools.product(*targets):
-        selected_ghosts_ids = [j for j in i if j != -1]
-        if len(set(selected_ghosts_ids)) != len(selected_ghosts_ids):
+    busters_ids = list(sorted(my_busters))
+    buster_ghost = {}
+    for i in busters_ids:
+        buster = my_busters[i]
+        buster_targets = [-1]
+        targets.append(buster_targets)
+        if buster.is_carrying() or len(buster.killers) > 0:
             continue
-        busters_cnt, steps_cnt = 0, 0
+        for ghost in ghosts.values():
+            steps = buster.turns_to_stay + buster.turns_to_bust(ghost)
+            if ghost.stamina <= 3 and ghost.time_to_live > steps:
+                buster_ghost[(i, ghost.id)] = steps
+                buster_targets.append(ghost.id)
+
+    for i in itertools.product(*targets):
+        bonus, loss = 0, 0
+        ghost_busters_cnt = {}
         for k in range(len(i)):
             if i[k] == -1:
                 continue
-            buster, ghost = my_busters[my_busters_ids[k]], ghosts[i[k]]
-            busters_cnt += 1
-            steps_cnt += buster.turns_to_bust(ghost) + buster.turns_to_stay + ghost.stamina + discount(my_base, enemy_base, ghost)
-        if best_var is None or (busters_cnt, -steps_cnt) > best_score:
-            best_score = (busters_cnt, -steps_cnt)
+            loss += buster_ghost[(busters_ids[k], i[k])]
+            if i[k] not in ghost_busters_cnt:
+                ghost_busters_cnt[i[k]] = 0
+            ghost_busters_cnt[i[k]] += 1
+        for ghost_id in ghost_busters_cnt:
+            ghost = ghosts[ghost_id]
+            if ghost.enemy_busters_cnt >= ghost_busters_cnt[ghost_id]:
+                continue
+            bonus += 1 + ghost.enemy_busters_cnt
+        if best_var is None or (bonus, -loss) > best_score:
+            best_score = (bonus, -loss)
             best_var = i
     dic = {}
     for k in range(len(best_var)):
         if best_var[k] == -1:
             continue
-        dic[my_busters_ids[k]] = best_var[k]
+        dic[busters_ids[k]] = best_var[k]
     return dic
 
 
@@ -244,6 +241,12 @@ class Ghost(Point):
     def enemy_busters_cnt(self):
         return self.busters_cnt - self.my_busters_cnt
 
+    @property
+    def time_to_live(self):
+        if self.enemy_busters_cnt == self.my_busters_cnt:
+            return np.inf
+        return self.stamina / self.busters_cnt
+
     def update(self, x, y, state, value):
         self.is_found = True
         self.x = x
@@ -350,17 +353,19 @@ class Game:
 
     def apply_symmetry(self, found_ghosts):
         for _id in found_ghosts:
+            ghost = self.ghosts[_id]
             op_id = _id + (-1, 1)[_id % 2]
             if not self.ghosts[op_id].is_found:
-                op_x, op_y = self.ghosts[_id].symmetry()
+                op_x, op_y = ghost.symmetry()
                 op_point = Point(op_x, op_y)
                 position_was_seen = any([p.distance(op_point) < DISTANCE_SEE
                                          for p in self.visited_points])
-                if not position_was_seen:
+                if not position_was_seen and \
+                        not(self.base.distance(ghost) < META_R ** 2 and ghost.stamina <= 3):
                     self.ghosts[op_id].x = op_x
                     self.ghosts[op_id].y = op_y
                     self.ghosts[op_id].is_found = True
-                    self.ghosts[op_id].stamina = self.ghosts[_id].stamina
+                    self.ghosts[op_id].stamina = ghost.stamina
 
 
 def init(init_lines):
@@ -433,24 +438,31 @@ def step(g):
         list_of_targets = g.ghosts.values()
         if i in targets:
             list_of_targets = [g.ghosts[targets[i]]]
-        can_catch_ghosts = buster.entities_in_range(list_of_targets, DISTANCE_BUST_MIN, DISTANCE_BUST)
-        if len(can_catch_ghosts) != 0:
-            res += f'BUST {can_catch_ghosts[0].id}\n'
-            continue
-        close_ghosts = buster.entities_in_range(list_of_targets, 0, DISTANCE_BUST_MIN)
-        if len(close_ghosts) != 0:
-            res += f'MOVE {buster.x} {buster.y}\n'
-            continue
-        if len(g.ghosts) != 0:
-            nearest_ghosts = buster.find_all_nearest(list_of_targets)
-            if nearest_ghosts is not None:
-                res += f'MOVE {nearest_ghosts[0].x} {nearest_ghosts[0].y}\n'
+
+        best_target, min_steps = None, None
+        for ghost in list_of_targets:
+            if not ghost.is_filled():
                 continue
-        if len(g.points_to_see) != 0:
-            nearest_points = buster.find_all_nearest(g.points_to_see)
-            res += f'MOVE {nearest_points[0].x} {nearest_points[0].y}\n'
-        else:
-            res += f'MOVE {g.enemy_base.x - 2000 * (g.my_id == 0) + 2000 * g.my_id} {g.enemy_base.y - 2200 * (g.my_id == 0) + 2200 * g.my_id}\n'
+            steps = buster.turns_to_stay + buster.turns_to_bust(ghost) + ghost.stamina
+            if best_target is None or steps < min_steps:
+                best_target, min_steps = ghost, steps
+        if best_target is None:
+            if len(g.points_to_see) != 0:
+                nearest_points = buster.find_all_nearest(g.points_to_see)
+                res += f'MOVE {nearest_points[0].x} {nearest_points[0].y}\n'
+            else:
+                res += f'MOVE {g.enemy_base.x - 2000 * (g.my_id == 0) + 2000 * g.my_id} {g.enemy_base.y - 2200 * (g.my_id == 0) + 2200 * g.my_id}\n'
+            continue
+        if buster.distance(best_target) > DISTANCE_BUST:
+            res += f'MOVE {best_target.x} {best_target.y}\n'
+            continue
+        if DISTANCE_BUST_MIN <= buster.distance(best_target) <= DISTANCE_BUST:
+            res += f'BUST {best_target.id}\n'
+            continue
+        if buster.distance(best_target) < DISTANCE_BUST_MIN and best_target.danger_point is None:
+            res += f'MOVE {g.base.x} {g.base.y}\n'
+            continue
+        res += f'MOVE {buster.x} {buster.y}\n'
     return res[:-1]
 
 
