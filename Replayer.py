@@ -1,15 +1,18 @@
 import pygame
 from engine import Entity, Engine
 from solution import Game, step, step_old
-from PUSH import push
+#from PUSH import push
+from PUSH2 import go_to_base, Mind
 import copy as c
 
 
 class State:
-    def __init__(self, engine, player0, player1):
+    def __init__(self, engine, player0, mind0, player1, mind1):
         self.engine = engine
         self.player0 = player0
+        self.mind0 = mind0
         self.player1 = player1
+        self.mind1 = mind1
 
 
 def drawWindow():
@@ -25,6 +28,8 @@ def drawWindow():
 
     pygame.draw.circle(win, (0, 0, 0), (0, 0), 160, 1)
     pygame.draw.circle(win, (0, 0, 0), (1600, 900), 160, 1)
+    pygame.draw.line(win, (0, 0, 0), (0, 440), (1600, 440), 1)
+    pygame.draw.line(win, (0, 0, 0), (0, 220), (1600, 220), 1)
     pygame.draw.line(win, (0, 0, 0), (547, 900), (1053, 0), 1)
     for i in current_step.engine.busters0:
         buster = current_step.engine.busters0[i]
@@ -113,7 +118,10 @@ states = []
 engine = Engine(busters_count, ghosts_count, busters, ghosts)
 player0.update(engine.get_info(0)[:-1])
 player1.update(engine.get_info(1)[:-1])
-current_step = State(engine, player0, player1)
+mind = Mind(player0)
+
+current_step = State(engine, player0, mind, player1, None)
+
 
 i = 0
 while i < len(steps1):
@@ -123,8 +131,8 @@ while i < len(steps1):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 states.append(c.deepcopy(current_step))
-                action0 = step(current_step.player0).split('\n')
-                action1 = push(current_step.player1).split('\n')
+                action0 = current_step.mind0.step().split('\n') #push(current_step.player0).split('\n')
+                action1 = go_to_base(current_step.player1).split('\n') #push(current_step.player1).split('\n')
                 current_step.engine.do(action0, action1)
                 current_step.player0.update(current_step.engine.get_info(0)[:-1])
                 current_step.player1.update(current_step.engine.get_info(1)[:-1])

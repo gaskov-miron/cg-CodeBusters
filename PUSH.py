@@ -1,45 +1,74 @@
-from solution import get_research_direction
+import copy
+from solution import Point
 
 
-def end(ghost):
-    return 0 < ghost.x < 16000 and 0 < ghost.y < 9000
-
-
-def find_pushed(my_busters, ghosts):
-    dic = []
-    list_of_used = []
-    for i in ghosts:
-        if i.x is not None and not end(i):
-            dic[i.find_all_nearest([my_busters[b] for b in my_busters if b not in list_of_used])[0]] = i
-            list_of_used.append(i.find_all_nearest([my_busters[b] for b in my_busters if b not in list_of_used])[0])
-    return dic
+def forecast(targets, points):
+    for point in points:
+        for target in targets:
+            if target.distance(point) <= 2200 ** 2:
+                target.move_backward(point, 400)
 
 
 def push(g):
     res = ''
     for i in g.my_ids:
-        if g.step > 9:
-            res = ''
-            ghosts = [i for i in g.ghosts.values() if i.x is not None and i.distance(g.base) < 5470 ** 2]
-            targets = find_pushed(g.my_busters, ghosts)
-            if i in targets:
-                if g.my_id == 0:
-                    ghost = targets[i]
-                    if ghost.x < g.my_busters[i].x:
-                        res += f'MOVE {ghost.x + 800} {ghost.y}\n'
-                    elif ghost.y >= g.my_busters[i].y:
-                        res += f'MOVE {ghost.x} {ghost.y + 800}\n'
-
-                else:
-                    ghost = targets[i]
-                    if ghost.x > g.my_busters[i].x:
-                        res += f'MOVE {ghost.x - 800} {ghost.y}\n'
-                    elif ghost.y <= g.my_busters[i].y:
-                        res += f'MOVE {ghost.x} {ghost.y - 800}\n'
-
-            else:
-                res += f'MOVE {g.base.x} {g.base.y}\n'
+        if g.my_id == 1:
+            res += f'MOVE {g.base.x} {g.base.y}\n'
         else:
-            dx, dy = get_research_direction(g.my_id, g.step, i, g.busters_cnt)
-            res += f'MOVE {g.my_busters[i].x + dx} {g.my_busters[i].y + dy}\n'
+            H1 = 4400
+            H2 = 2200
+            if i == 0:
+                if g.my_busters[i].y != H1:
+                    res += f'MOVE {0} {H1}\n'
+                elif g.my_busters[i].x != 16000:
+                    targets = copy.deepcopy([gh for gh in g.ghosts.values() if gh.x is not None])
+                    targets = [gh for gh in targets if (gh.x >= g.my_busters[i].x >= gh.x - 800) and (gh.y < g.my_busters[i].y)]
+                    current_x, current_y = g.my_busters[i].x, g.my_busters[i].y
+                    forecast(targets, [Point(current_x + 800*i, current_y) for i in range(4)])
+                    not_pushed = [target.id for target in targets if target.y >= H2]
+                    targets = copy.deepcopy([gh for gh in g.ghosts.values() if gh.x is not None])
+                    forecast(targets, [Point(current_x + 800 * i, current_y) for i in range(1)])
+                    targets = {tar.id: tar for tar in targets}
+                    if len(not_pushed) != 0:
+                        min_x = 800
+                        min_id = not_pushed[0]
+                        for id_ in not_pushed:
+                            print(targets[id_].x, g.my_busters[i].x)
+                            if abs(targets[id_].x - g.my_busters[i].x) < min_x:
+                                min_x = targets[id_].x - g.my_busters[i].x
+                                min_id = id_
+                        res += f'MOVE {targets[min_id].x} {H1}\n'
+                    else:
+                        res += f'MOVE {16000} {H1}\n'
+                else:
+                    res += f'MOVE {g.my_busters[i].x} {g.my_busters[i].y}\n'
+            if i == 1:
+                if g.my_busters[0].x == 16000:
+                    if g.my_busters[i].y != H2:
+                        res += f'MOVE {0} {H2}\n'
+                    elif g.my_busters[i].x != 16000:
+                        targets = copy.deepcopy([gh for gh in g.ghosts.values() if gh.x is not None])
+                        targets = [gh for gh in targets if
+                                   (gh.x >= g.my_busters[i].x >= gh.x - 800) and (gh.y < g.my_busters[i].y)]
+                        current_x, current_y = g.my_busters[i].x, g.my_busters[i].y
+                        forecast(targets, [Point(current_x + 800 * i, current_y) for i in range(4)])
+                        not_pushed = [target.id for target in targets if target.y > 0]
+                        targets = copy.deepcopy([gh for gh in g.ghosts.values() if gh.x is not None])
+                        forecast(targets, [Point(current_x + 800 * i, current_y) for i in range(1)])
+                        targets = {tar.id: tar for tar in targets}
+                        if len(not_pushed) != 0:
+                            min_x = 800
+                            min_id = not_pushed[0]
+                            for id_ in not_pushed:
+                                print(targets[id_].x, g.my_busters[i].x)
+                                if abs(targets[id_].x - g.my_busters[i].x) < min_x:
+                                    min_x = targets[id_].x - g.my_busters[i].x
+                                    min_id = id_
+                            res += f'MOVE {targets[min_id].x} {H2}\n'
+                        else:
+                            res += f'MOVE {16000} {H2}\n'
+                    else:
+                        res += f'MOVE {g.my_busters[i].x} {g.my_busters[i].y}\n'
+                else:
+                    res += f'MOVE {g.my_busters[i].x} {g.my_busters[i].y}\n'
     return res[:-1]
