@@ -133,6 +133,7 @@ class Point:
         x = max(0, min(new_point[0], MAX_X))
         y = max(0, min(new_point[1], MAX_Y))
         self.x, self.y = int(x), int(y)
+        return self
 
     def move_backward(self, point, distance):
         self.move_toward(Point(2 * self.x - point.x, 2 * self.y - point.y), distance)
