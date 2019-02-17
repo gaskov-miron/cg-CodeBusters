@@ -4,6 +4,7 @@ from solution import Game, step, step_old
 #from PUSH import push
 from PUSH2 import go_to_base, Mind
 import copy as c
+from Generator import generate
 
 
 class State:
@@ -82,7 +83,7 @@ def drawWindow():
 
 blocks = []
 current_block = None
-file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v2_3.txt'
+file_name_new = '/home/miron/work/cg-CodeBusters/tests/game_v3_1.txt'
 block_starters = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n']
 block_stoppers = ['INIT:\n', 'INPUT:\n', 'OUTPUT:\n', '\n']
 win = pygame.display.set_mode((1600, 900))
@@ -115,6 +116,13 @@ for step_ in zip(steps1, steps2):
                 busters[int(id_)] = Entity(i)
 
 states = []
+
+#busters_count = 2
+#ghosts_count = 501
+#busters, ghosts = generate(busters_count, ghosts_count)
+
+#player0, player1 = Game(str(busters_count)+"\n"+str(ghosts_count)+"\n0"), Game(str(busters_count)+"\n"+str(ghosts_count)+"\n1")
+
 engine = Engine(busters_count, ghosts_count, busters, ghosts)
 player0.update(engine.get_info(0)[:-1])
 player1.update(engine.get_info(1)[:-1])
@@ -124,7 +132,7 @@ current_step = State(engine, player0, mind, player1, None)
 
 
 i = 0
-while i < len(steps1):
+while i < 400:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -132,7 +140,8 @@ while i < len(steps1):
             if event.key == pygame.K_RIGHT:
                 states.append(c.deepcopy(current_step))
                 action0 = current_step.mind0.step().split('\n') #push(current_step.player0).split('\n')
-                action1 = go_to_base(current_step.player1).split('\n') #push(current_step.player1).split('\n')
+                #action1 = go_to_base(current_step.player1).split('\n') #push(current_step.player1).split('\n')
+                action1 = step(current_step.player1).split('\n')
                 current_step.engine.do(action0, action1)
                 current_step.player0.update(current_step.engine.get_info(0)[:-1])
                 current_step.player1.update(current_step.engine.get_info(1)[:-1])
@@ -143,7 +152,5 @@ while i < len(steps1):
                     current_step = states[i]
                     del states[i]
 
-    if i == len(steps1) - 1:
-        pygame.quit()
     drawWindow()
 

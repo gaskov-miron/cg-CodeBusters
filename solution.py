@@ -106,6 +106,10 @@ def find_targets(my_busters, ghosts, my_base, enemy_base):
 
 class Point:
     def __init__(self, x, y):
+        if x is not None:
+            x = int(round(x))
+        if y is not None:
+            y = int(round(y))
         self.x, self.y = x, y
 
     def is_filled(self):
